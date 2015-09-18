@@ -1,0 +1,54 @@
+<div class="row"> 
+<div class="col-xs-7 col-md-7 ">
+ <table class="table table-bordered">
+    <thead class="label-info">
+    
+        <tr>
+        <th><h3>Product Name</3></th>
+        <th><h3>Quantity</3></th>
+        <th><h3>Manage</3></th>
+        </tr>
+    </thead>
+    {{#each products}} 
+        <tbody>
+            <tr>
+        <td>{{this.name}}</td>
+        <td>{{this.qty}}</td>
+        <td>
+     <button type="button" class="btn btn-default" href="">Edit</button>
+     <button type="button" class="btn btn-success" onClick="location.href='/addProduct'">Add</button>
+     <button type="button" class="btn btn-danger" href="">Remove</button>
+        </td>
+            </tr>
+        </tbody>
+    {{/each}}
+        </table>
+    </div>
+        <div class="col-sm-5">
+          <div class="panel panel-success">
+            <div class="panel-heading">
+            <h3 class="panel-title"><strong>Most popular Product</strong></h3>
+            </div>
+            <div class="panel-body">
+        {{#most_popularProduct}}
+<p><h4 class="label-info"><strong>Product Name :</strong>{{this.productName}}</p>
+<p ><h4 class="label-info"><strong>Product Quantity :</strong>{{this.qty}}</p>
+        {{/most_popularProduct}}
+            </div>
+          </div>
+          <br>
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h3 class="panel-title"><strong>least popular Product</strong></h3>
+            </div>
+            <div class="panel-body" role="label label-info">
+                {{#least_popularProduct}}
+            <p><h4 class="label-info"><strong>Product Name :</strong>{{this.productName}}</p>
+            <p><h4 class="label-info"><strong>Product Quantity :</strong>{{this.qty}}</p>
+                {{/least_popularProduct}}
+            </div>
+          </div>
+        </div>
+    </row>
+</div>
+

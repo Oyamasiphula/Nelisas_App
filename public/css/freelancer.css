@@ -1,0 +1,292 @@
+/*!
+ * Start Bootstrap - Freelancer Bootstrap Theme (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+
+@charset "UTF-8";
+@import url(http://fonts.googleapis.com/css?family=Oxygen+Mono);
+header {
+    text-align: center;
+    color: #fff;
+    background: #18bc9c;
+}
+
+header .container {
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+header img {
+    display: block;
+    margin: 0 auto 20px;
+}
+
+header .intro-text .name {
+    display: block;
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 2em;
+    font-weight: 700;
+}
+
+header .intro-text .skills {
+    font-size: 1.25em;
+    font-weight: 300;
+}
+
+.Home-but {
+  padding: 13px;
+  text-transform: uppercase;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+   position: absolute;
+
+}
+
+#cssmenu {padding: 0; margin: 0; border: 0; width:100%}
+#cssmenu ul, #cssmenu li {list-style: none; margin: 0;padding-left: 2px;}
+#cssmenu ul {position: relative; z-index: 597; padding-left: 466px;}
+#cssmenu ul li { float: left; min-height: 1px; vertical-align: middle;}
+#cssmenu ul li.hover,
+#cssmenu ul li:hover {position: relative; z-index: 599; cursor: default;}
+#cssmenu ul ul {visibility: hidden; position: absolute; top: 100%; left: 0; z-index: 598; width: 100%;}
+#cssmenu ul ul li {float: none;}
+#cssmenu ul ul ul {top: 0; left: auto; right: -99.5%; }
+#cssmenu ul li:hover > ul { visibility: visible;}
+#cssmenu ul ul {bottom: 0; left: 0;}
+#cssmenu ul ul {margin-top: 0; }
+#cssmenu ul ul li {font-weight: normal;}
+#cssmenu a { display: block; line-height: 1em; text-decoration: none; }
+
+#cssmenu {
+  background: #333;
+  border-bottom: 4px solid #1b9bff;
+  font-family: initial;
+  font-size: 12px;
+  padding-left: 368px;
+}
+
+#cssmenu > ul { *display: inline-block; }
+
+#cssmenu:after, #cssmenu ul:after {
+    content: '';
+    display: block;
+    clear: both; 
+}
+
+#cssmenu a {
+    background: #333;
+    color: #CBCBCB;
+    padding: 0 20px; 
+}
+#cssmenu ul { text-transform: uppercase; }
+
+#cssmenu ul ul {
+      border-top: 4px solid #1b9bff;
+      text-transform: none;
+      min-width: 190px; 
+}
+#cssmenu ul ul a {
+        background: #1b9bff;
+        color: #FFF;
+        border: 1px solid #0082e7;
+        border-top: 0 none;
+        line-height: 150%;
+        padding: 16px 20px; 
+}
+#cssmenu ul ul ul { border-top: 0 none; }
+
+#cssmenu ul ul li { position: relative }
+
+#cssmenu > ul > li > a { line-height: 48px;  }
+
+#cssmenu ul ul li:first-child > a { border-top: 1px solid #0082e7; }
+#cssmenu ul ul li:hover > a { background: #35a6ff; }
+
+#cssmenu ul ul li:last-child > a {
+          border-radius: 0 0 3px 3px;
+          box-shadow: 0 1px 0 #1b9bff; 
+}
+
+#cssmenu ul ul li:last-child:hover > a { border-radius: 0 0 0 3px; }
+
+#cssmenu ul ul li.has-sub > a:after {
+          content: '+';
+          position: absolute;
+          top: 50%;
+          right: 15px;
+          margin-top: -8px;
+}
+
+ #cssmenu ul li:hover > a, #cssmenu ul li.active > a {
+    background: rgba(255, 56, 27, 0.69);
+    color: #FFF;
+}
+#cssmenu ul li.has-sub > a:after {
+      content: '+';
+      margin-left: 5px; 
+}
+#cssmenu ul li.last ul {
+      left: auto;
+      right: 0; 
+}
+#cssmenu ul li.last ul ul {
+        left: auto;
+        right: 99.5%;
+}
+ 
+/*buttons below must be replaced*/
+.btn-social {
+  display: inline-block;
+  width: 50px;
+  border: 2px solid #fff;
+  border-radius: 100%;
+  text-align: center;
+  font-size: 20px;
+  line-height: 45px;
+}
+.btn-outline {
+    margin-top: 15px;
+    border: solid 2px #fff;
+    font-size: 20px;
+    color: #fff;
+    background: 0 0;
+    transition: all .3s ease-in-out;
+}
+
+.btn-outline:hover,
+.btn-outline:focus,
+.btn-outline:active,
+.btn-outline.active {
+border: solid 2px #fff;
+color: #18bc9c;
+background: #fff;
+margin: 0.5px;
+}
+ 
+.bg {
+  color: rgb(160, 142, 195);
+  opacity: .9;
+  margin: 0px;
+}
+.col-sm-5 {
+  color: black;
+  font-variant: small-caps;
+  font-stretch: semi-expanded;
+}
+td, th {
+  padding: 0;
+  color: floralwhite;
+  font-variant: small-caps;
+  font-size: larger;
+  text-align: center;
+}
+
+.main-gradient {
+  background: -moz-linear-gradient(top, #00b4da 0%, #363636 100%); /* FF3.6+ */
+  background: linear-gradient(to bottom, #00b4da 0%,#363636 100%); /* W3C */
+}
+
+/* sticky footer from css-tricks.com */
+* { margin:0; padding:0; } 
+
+/*html, footer, #wrap { height: 100%; }*/
+
+footer > #wrap {height: auto; min-height: 100%;}
+
+#main { padding-bottom: 150px; }
+  /* must be same height as the footer */
+
+footer { 
+  position: relative;
+  margin-top: -150px;  /*negative value of footer height*/ 
+  height: 150px;
+  background: #363636;
+  border: dashed; 
+} 
+
+/* CLEAR FIX*/
+/*.clearfix:after {content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;}*/
+
+.clearfix {display: inline-block;}
+/* Hides from IE-mac \*/
+* html .clearfix { height: 1%;}
+.clearfix {display: block;
+}
+/* End hide from IE-mac */
+
+/* end sticky footer stuff from css-tricks.com */
+
+@-webkit-keyframes dot-move {
+  from {
+    background-position: 0 0
+  }
+  to { 
+    background-position: 0 -100px
+  }
+}
+
+.fade-top {
+  position:absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+    
+  background: -webkit-linear-gradient(bottom, rgba(0,180,212,0), #00b4d4);
+}
+
+.dots {
+    height: 231px;
+    width: 100%;
+    position: absolute;
+    bottom: -87px;
+    left: 0px;
+    right: 0px;
+    background-repeat: repeat;
+    background-position: 0% 0%;
+    -webkit-animation-name: dot-move;
+    -webkit-animation-duration: 3s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite
+}
+
+
+.dots {
+   background: url(data:image/png;base64,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); 
+
+}
+
+
+.footer-below{
+  font-size: 14px;
+}
+
+#fimg img {
+  vertical-align: middle;
+  background-repeat: no-repeat;
+}
+.container {
+    margin-bottom: 162px;
+    position: initial;
+    display: inherit;
+}
+.row {
+    position: inherit;
+    margin-left: -49px;
+    margin-right: -15px;
+    padding: 48px;
+}
+footer img {
+  float: right;
+  height: 233px;
+  width: 100%;
+  position: absolute;
+}
