@@ -5,25 +5,24 @@
     
         <tr>
         <th><h3>Product Name</3></th>
-        <th><h3>Quantity</3></th>
         <th><h3>Manage</3></th>
         </tr>
     </thead>
     {{#each products}} 
         <tbody>
             <tr>
-        <td>{{this.name}}</td>
-        <td>{{this.qty}}</td>
+        <td>{{Product_name}}</td>
         <td>
-     <button type="button" class="btn btn-default" href="">Edit</button>
-     <button type="button" class="btn btn-success" onClick="location.href='/addProduct'">Add</button>
-     <button type="button" class="btn btn-danger" href="">Remove</button>
+     <button type="button" class="btn btn-default" onClick="location.href='/products/edit/{{id}}'"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+     <button type="button" class="btn btn-danger" onClick="location.href='/products/delete/{{id}}'"><span class="glyphicon glyphicon-remove"></span> Remove</button>
         </td>
             </tr>
         </tbody>
     {{/each}}
         </table>
+        <div><span class="glyphicon glyphicon-plus"></span><button type="button" class="btn btn-success" onClick="location.href='/addProduct'">Add product</button></div>
     </div>
+
         <div class="col-sm-5">
           <div class="panel panel-success">
             <div class="panel-heading">
