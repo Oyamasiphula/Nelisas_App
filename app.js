@@ -6,7 +6,8 @@ var express = require('express'),
  	myConnection = require('express-myconnection'),
  	bodyParser = require('body-parser'),
  	session = require('express-session'),	 
- 	products = require('./routes/products');
+ 	products = require('./routes/products'),
+ 	productsCategories = require('./routes/categories');
 
 
 var app = express();
@@ -52,7 +53,6 @@ app.get('/addProduct' , function(req, res){
 	//Create routes
 res.render('addProduct');
 });
-
 app.get('/products', products.show);
 app.get('/products/edit/:id', products.get);
 app.post('/products/update/:id', products.update);
@@ -60,13 +60,16 @@ app.post('/products/add', products.add);
 app.get('/products/delete/:id', products.delete);
 
  // Creating routes with templates...
-// app.get('/productsCategories', function(req, res){
-// 	//catNames was an object "cats" in routes and then converted to an array now that we can use "catNames" with our eg with mustache{{this.catNames}}
-// res.render('productsCategories', );
 
-app.get('/addProductCategories', function(req,res){
-	res.render('addProductCategories')
-	})
+app.get('/addProductsCategories' , function(req, res){
+	//Create routes
+res.render('addProductsCategories');
+});
+app.get('/productsCategories', productsCategories.show);
+app.get('/productsCategories/edit/:id', productsCategories.get);
+app.post('/productsCategories/update/:id', productsCategories.update);
+app.post('/productsCategories/add/', productsCategories.add);
+app.get('/productsCategories/delete/:id', productsCategories.delete);
 
 /*we call "getProductCategories()" therefore "findCatNames = productCategories.findProductCategories();"is being excetuted -
 by having original function's method for that instance new variable is must be created so that we prevent to get error of undefined values*/
