@@ -11,7 +11,7 @@ exports.show = function (req, res, next) {
             if (err) return next(err);
 
             res.render( 'productsCategories', {
-                products : results
+                categories : results
             });
       });
     });
@@ -22,7 +22,7 @@ exports.add = function (req, res, next) {
 
         var input = JSON.parse(JSON.stringify(req.body));
         var data = {
-            Product_name : input.Product_name,
+            Category_name : input.Category_name,
         };
 
         if (err) 
@@ -46,7 +46,7 @@ exports.get = function(req, res, next){
                 console.log("Error Selecting : %s ",err );
             }
 
-            res.render('editCategoy',{page_title:"Edit Customers - Node.js", data : rows[0]});      
+            res.render('editProductsCategories',{page_title:"Edit Customers - Node.js", data : rows[0]});      
         }); 
     });
 };
