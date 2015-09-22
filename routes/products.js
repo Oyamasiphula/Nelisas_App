@@ -7,13 +7,30 @@ exports.show = function (req, res, next) {
 	req.getConnection(function(err, connection){
 		if (err) 
 			return next(err);
-		connection.query('SELECT * from Products_td', [], function(err, results) {
-        	if (err) return next(err);
 
-    		res.render( 'products', {
-    			products : results
-    		});
-      });
+		var findMostPopularProductQuery = 'SELECT SUM(qTy) AS Quantity, Product_id ,Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id GROUP BY Product_name ORDER BY SUM(qTy) DESC LIMIT 0,1';
+		var findleastPopularProductQuery = 'SELECT SUM(qTy) AS Quantity, Product_id ,Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id GROUP BY Product_name ORDER BY SUM(qTy) ASC LIMIT 0,1';
+
+		connection.query(findMostPopularProductQuery, [], function(err, mostPopularProduct){
+			if (err) return next(err);
+
+		connection.query(findleastPopularProductQuery, [], function(err, leastPopularProduct){
+			if (err) return next(err);
+
+		connection.query('SELECT * from Products_td', [], function(err, results) {
+        		if (err) return next(err);
+
+        		console.log(mostPopularProduct)
+
+    			res.render( 'products', {
+    				products : results,
+    				mostPopularProduct : mostPopularProduct,
+    				leastPopularProduct : leastPopularProduct
+    				});
+     	 		});
+
+			});
+		});
 	});
 };
 
@@ -77,6 +94,37 @@ exports.delete = function(req, res, next){
 			res.redirect('/products');
 		});
 		 
+	});
+};
+
+exports.showPopularProduct = function(req, res, next){
+	req.getConnection(function(err, connection){
+		if(err)
+			return next(err);
+		connection.query('SELECT SUM(qTy) AS Quantity, Product_id ,Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id GROUP BY Product_name ORDER BY SUM(qTy) DESC LIMIT 0,1', [], function(err, results){
+		if (err) 
+			return next(err);
+    	
+    		res.render( 'products', {
+    			mostPopularProduct : results
+
+    		});
+		});
+	});
+};
+exports.showLeastPopularProduct = function(req, res, next){
+	req.getConnection(function(err, connection){
+		if(err)
+			return next(err);
+		connection.query('SELECT SUM(qTy) AS Quantity, Product_id ,Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id GROUP BY Product_name ORDER BY SUM(qTy) ASC LIMIT 0,1', [], function(err, results){
+		if (err) 
+			return next(err);
+    	
+    		res.render( 'products', {
+    			leastPopularProduct : results
+
+    		});
+		});
 	});
 };
 

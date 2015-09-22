@@ -29,10 +29,10 @@
             <h3 class="panel-title"><strong>Most popular Product</strong></h3>
             </div>
             <div class="panel-body">
-        {{#most_popularProduct}}
-<p><h4 class="label-info"><strong>Product Name :</strong>{{this.productName}}</p>
-<p ><h4 class="label-info"><strong>Product Quantity :</strong>{{this.qty}}</p>
-        {{/most_popularProduct}}
+        {{#each mostPopularProduct}}
+<p><h4 class="label-info"><strong>Product Name :</strong>{{Product_name}}</p>
+<p ><h4 class="label-info"><strong>Product Quantity :</strong>{{Quantity}}</p>
+        {{/each}}
             </div>
           </div>
           <br>
@@ -41,10 +41,10 @@
               <h3 class="panel-title"><strong>least popular Product</strong></h3>
             </div>
             <div class="panel-body" role="label label-info">
-                {{#least_popularProduct}}
-            <p><h4 class="label-info"><strong>Product Name :</strong>{{this.productName}}</p>
-            <p><h4 class="label-info"><strong>Product Quantity :</strong>{{this.qty}}</p>
-                {{/least_popularProduct}}
+                {{#each leastPopularProduct}}
+            <p><h4 class="label-info"><strong>Product Name :</strong>{{Product_name}}</p>
+            <p><h4 class="label-info"><strong>Product Quantity :</strong>{{Quantity}}</p>
+                {{/each}}
             </div>
           </div>
         </div>

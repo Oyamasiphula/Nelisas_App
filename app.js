@@ -53,11 +53,15 @@ app.get('/addProduct' , function(req, res){
 	//Create routes
 res.render('addProduct');
 });
+
 app.get('/products', products.show);
 app.get('/products/edit/:id', products.get);
 app.post('/products/update/:id', products.update);
 app.post('/products/add', products.add);
 app.get('/products/delete/:id', products.delete);
+app.get('/products', products.showPopularProduct);
+app.get('/products', products.showLeastPopularProduct);
+
 
  // Creating routes with templates...
 
@@ -70,6 +74,7 @@ app.get('/productsCategories/edit/:id', productsCategories.get);
 app.post('/productsCategories/update/:id', productsCategories.update);
 app.post('/productsCategories/add/', productsCategories.add);
 app.get('/productsCategories/delete/:id', productsCategories.delete);
+
 
 /*we call "getProductCategories()" therefore "findCatNames = productCategories.findProductCategories();"is being excetuted -
 by having original function's method for that instance new variable is must be created so that we prevent to get error of undefined values*/
