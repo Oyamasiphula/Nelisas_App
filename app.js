@@ -60,7 +60,7 @@ app.post('/products/update/:id', products.update);
 app.post('/products/add', products.add);
 app.get('/products/delete/:id', products.delete);
 app.get('/products', products.showPopularProduct);
-app.get('/products', products.showLeastPopularProduct);
+// app.get('/products', products.showLeastPopularProduct);
 
 
  // Creating routes with templates...
@@ -74,6 +74,7 @@ app.get('/productsCategories/edit/:id', productsCategories.get);
 app.post('/productsCategories/update/:id', productsCategories.update);
 app.post('/productsCategories/add/', productsCategories.add);
 app.get('/productsCategories/delete/:id', productsCategories.delete);
+// app.get('/productsCategories', productsCategories.showLeastPopularProduct);
 
 
 /*we call "getProductCategories()" therefore "findCatNames = productCategories.findProductCategories();"is being excetuted -
