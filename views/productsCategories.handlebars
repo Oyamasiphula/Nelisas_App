@@ -25,25 +25,25 @@
         <div class="col-sm-5">
           <div class="panel panel-success">
             <div class="panel-heading">
-            <h3 class="panel-title"><strong>Most Popular Category</strong></h3>
+            <h3 class="panel-title"><strong><span class="glyphicon glyphicon-stats"></span> Most Popular Category</strong></h3>
             </div>
             <div class="panel-body">
-        {{#most_PopularCategory}}
-<p><h4 class="label-info"><strong>Category Name :</strong>{{categoryName}}</p>
-<p ><h4 class="label-info"><strong>Category Quantity :</strong>{{this.qty}}</p>
-        {{/most_PopularCategory}}
+        {{#each showMostPopularCat}}
+<p><h4 class="label-info"><strong>Category Name :</strong>{{Category_name}}</p>
+<p ><h4 class="label-info"><strong>Category Quantity :</strong>{{Quantity}}</p>
+        {{/each}}
             </div>
           </div>
           <br>
           <div class="panel panel-warning">
             <div class="panel-heading">
-              <h3 class="panel-title"><strong>Least Popular Category</strong></h3>
+              <h3 class="panel-title"><strong><span class="glyphicon glyphicon-stats"></span> Least Popular Category</strong></h3>
             </div>
             <div class="panel-body" role="label label-info">
-                {{#least_PopularCategory}}
-            <p><h4 class="label-info"><strong>Category Name :</strong>{{categoryName}}</p>
-            <p><h4 class="label-info"><strong>Category Quantity :</strong>{{this.qty}}</p>
-                {{/least_PopularCategory}}
+                {{#each showLeastPopularCAt}}
+            <p><h4 class="label-info"><strong>Category Name :</strong>{{Category_name}}</p>
+            <p><h4 class="label-info"><strong>Category Quantity :</strong>{{Quantity}}</p>
+                {{/each}}
             </div>
           </div>
         </div>
