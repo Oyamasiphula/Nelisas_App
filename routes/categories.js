@@ -5,17 +5,32 @@
 
 exports.show = function (req, res, next) {
     req.getConnection(function(err, connection){
-        if (err) 
-            return next(err);
-        connection.query('SELECT * from Categories_td', [], function(err, results) {
-            if (err) return next(err);
+                if (err) 
+                    return next(err);
+var showMostPopularCat = 'SELECT Categories_td.Category_name ,SUM(Sales_td.qTy) AS Quantity FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id GROUP BY Categories_td.Category_name ORDER BY Quantity DESC LIMIT 0,1';
+        
+var showLeastPopularCAt = 'SELECT Categories_td.Category_name ,SUM(Sales_td.qTy) AS Quantity FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id GROUP BY Categories_td.Category_name ORDER BY Quantity ASC LIMIT 0,1';    
+    
+    connection.query(showMostPopularCat, [], function(err, showMostPopularCat){
+            if(err)
+                return next(err)
+    connection.query(showLeastPopularCAt, [], function(err, showLeastPopularCAt){
+            if(err)
+                return next(err)
+    connection.query('SELECT * from Categories_td', [], function(err, results) {
+            if (err) 
+                return next(err);
 
             res.render( 'productsCategories', {
-                categories : results
+                categories : results,
+                showMostPopularCat : showMostPopularCat,
+                showLeastPopularCAt : showLeastPopularCAt
+                        });
+                     });
+                });
             });
-      });
-    });
-};
+         });
+    };
 
 exports.add = function (req, res, next) {
     req.getConnection(function(err, connection){
