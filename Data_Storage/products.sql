@@ -1,3 +1,4 @@
+ALTER TABLE Products_td ADD FOREIGN KEY (Category_id) REFERENCES Categories_td (id);
 INSERT INTO Products_td (Category_id, Product_name) VALUES (1 ,"Milk 1l");
 INSERT INTO Products_td (Category_id, Product_name) VALUES (1 ,"Imasi");
 INSERT INTO Products_td (Category_id, Product_name) VALUES (1 ,"Bread");
