@@ -1,5 +1,6 @@
 <h1>Products</h1>
 
+
 {{#products}}
   <h2>{{Product_name}}</h2>
   <a href="/products/edit/{{id}}">Edit</a>
@@ -10,11 +11,19 @@
   <p>The list is empty.</p>
 {{/empty}}
 
+
 <div id="add-products">
 	
 	<h1>Add a product</h1>
-	<form action="products/add" method="POST">
-		Description: <input type="text" name="Product_name">	
+	<form action="/products/add/" method="POST">
+		Description: <input name="Product_name" type="text">
+    <!-- [[dropdown]] -->
+          <select name="Category_id">
+            {{#categories}}
+            <option value = "{{id}}">{{Category_name}}</option>
+            {{/categories}}
+          </select>	
+      <!-- [[/dropdown]] -->
 		<input type="submit">
 	</form>
 </div>
@@ -23,6 +32,4 @@
 .main-menu {
 	display: none;
 }
-
 </style>
-
