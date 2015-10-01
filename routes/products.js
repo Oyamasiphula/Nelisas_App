@@ -36,20 +36,38 @@ exports.show = function (req, res, next) {
 
 exports.add = function (req, res, next) {
 	req.getConnection(function(err, connection){
+		if (err) 
+			console.log(err);
 
 		var input = JSON.parse(JSON.stringify(req.body));
 		var data = {
             Product_name : input.Product_name,
+            Category_id : input.Category_id
         };
 
-		if (err) 
-			return next(err);
 		
 		connection.query('insert into Products_td set ?', data, function(err, results) {
         	if (err)
               console.log("Error inserting : %s ",err );
-         
+         		console.log(data);
+
           	res.redirect('/products');
+      	});
+	});
+};
+
+exports.showAdd = function (req, res, next) {
+	req.getConnection(function(err, connection){
+		if (err) 
+			return next(err);
+		
+    	connection.query('SELECT * from Categories_td', [], function(err, results) {
+        	if (err)
+              console.log("Error Selecting : %s ",err );
+         
+          	res.render('addProduct', {
+          		categories : results
+          	});
       	});
 	});
 };
