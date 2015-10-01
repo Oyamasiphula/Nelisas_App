@@ -21,7 +21,7 @@ var showLeastPopularCAt = 'SELECT Categories_td.Category_name ,SUM(Sales_td.qTy)
             if (err) 
                 return next(err);
 
-            res.render( 'productsCategories', {
+            res.render( 'productsCategories',{
                 categories : results,
                 showMostPopularCat : showMostPopularCat,
                 showLeastPopularCAt : showLeastPopularCAt
