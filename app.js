@@ -48,27 +48,20 @@ app.get('/', function(req, res){
 }); 
 
 
- // Creating routes with templates...
-app.get('/addProduct' , function(req, res){
-	//Create routes
-res.render('addProduct');
-});
-
 app.get('/products', products.show);
 app.get('/products/edit/:id', products.get);
 app.post('/products/update/:id', products.update);
-app.post('/products/add', products.add);
+app.get('/products/add/', products.showAdd);
+app.post('/products/add/', products.add);
 app.get('/products/delete/:id', products.delete);
-app.get('/products', products.showPopularProduct);
-// app.get('/products', products.showLeastPopularProduct);
-
 
  // Creating routes with templates...
 
 app.get('/addProductsCategories' , function(req, res){
 	//Create routes
-res.render('addProductsCategories');
+	res.render('addProductsCategories');	
 });
+
 app.get('/productsCategories', productsCategories.show);
 app.get('/productsCategories/edit/:id', productsCategories.get);
 app.post('/productsCategories/update/:id', productsCategories.update);
