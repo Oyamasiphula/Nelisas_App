@@ -34,7 +34,6 @@ var showLeastPopularCAt = 'SELECT Categories_td.Category_name ,SUM(Sales_td.qTy)
 
 exports.add = function (req, res, next) {
     req.getConnection(function(err, connection){
-
         var input = JSON.parse(JSON.stringify(req.body));
         var data = {
             Category_name : input.Category_name,

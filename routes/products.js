@@ -71,18 +71,24 @@ exports.showAdd = function (req, res, next) {
       	});
 	});
 };
-
-exports.get = function(req, res, next){
-	var id = req.params.id;
+exports.showEdit = function (req, res, next) {
 	req.getConnection(function(err, connection){
+		if (err) 
+			return next(err);
+		var id = req.params.id;
+    	connection.query('SELECT * from Categories_td', [], function(err, results) {
+        	if (err)
+              console.log("Error Selecting : %s ",err );
+         connection.query('SELECT * FROM Products_td WHERE id = ?', [id], function(err,rows){
+			if(err)return next(err);
 
-		connection.query('SELECT * FROM Products_td WHERE id = ?', [id], function(err,rows){
-			if(err){
-    			console.log("Error Selecting : %s ",err );
-			}
+			res.render('editProduct', { page_title:"Edit Customers - Node.js",
+			 products : rows[0],
+			 categories:results
 
-			res.render('editProduct',{page_title:"Edit Customers - Node.js", data : rows[0]});      
-		}); 
+				});      
+			 })
+      	});
 	});
 };
 
@@ -90,6 +96,7 @@ exports.update = function(req, res, next){
 
 	var data = JSON.parse(JSON.stringify(req.body));
     var id = req.params.id;
+
     req.getConnection(function(err, connection){
     	connection.query('UPDATE Products_td SET ? WHERE id = ?', [data, id], function(err, rows){
     		

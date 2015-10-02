@@ -49,8 +49,8 @@ app.get('/', function(req, res){
 
 
 app.get('/products', products.show);
-app.get('/products/edit/:id', products.get);
-app.post('/products/update/:id', products.update);
+app.get('/products/edit/:id', products.showEdit);
+app.post('/products/edit/:id', products.update);
 app.get('/products/add/', products.showAdd);
 app.post('/products/add/', products.add);
 app.get('/products/delete/:id', products.delete);

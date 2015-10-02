@@ -1,11 +1,17 @@
 <h1>Edit</h1>
 
-{{#data}}
-<form action="/products/update/{{id}}" method="POST">
-	Description: <input type="text" name="Product_name" value="{{Product_name}}" >	
+{{#products}}
+<form action="/products/edit/{{id}}" method="POST">
+	
+	Description: <input type="text" name="Product_name" value="{{Product_name}}" >
+	{{/products}}
+	<select name="Category_id">
+            {{#categories}}
+            <option value = "{{id}}">{{Category_name}}</option>
+            {{/categories}}
+          </select>		
 	<input type="submit">
 </form>
-{{/data}}
 
 <style type="text/css">
 .main-menu {
