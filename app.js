@@ -49,7 +49,7 @@ app.get('/', function(req, res){
 
 
 app.get('/products/', products.show);
-app.get('/products/', products.showProdCatsForSpecProd);
+// app.get('/products/', products.showProdCatsForSpecProd);
 app.get('/products/edit/:id', products.showEdit);
 app.post('/products/edit/:id', products.update);
 app.get('/products/add/', products.showAdd);
