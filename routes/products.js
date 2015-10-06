@@ -14,6 +14,7 @@ exports.show = function (req, res, next) {
 		var findleastPopularProductQuery = 'SELECT SUM(qTy) AS Quantity, Product_id ,Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id GROUP BY Product_name ORDER BY SUM(qTy) ASC LIMIT 0,1';
 		var categoriesDataPullReq = 'SELECT id, Category_name from Categories_td';
 
+
 		connection.query(findMostPopularProductQuery, [], function(err, mostPopularProduct){
 			if (err) 
 					return next(err);
@@ -22,36 +23,18 @@ exports.show = function (req, res, next) {
 			if (err) 
 					return next(err);
 
-		connection.query(categoriesDataPullReq , [], function(err, categoryList){
-			if (err) 
-					return next("Error showing : %s ",err );
-
-		connection.query('SELECT * from Products_td', [id], function(err, results) {
-				console.log(categoryList)
-
+		connection.query('SELECT * FROM Products_td INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id', [id], function(err, results) {
         	if (err) 
         			return next(err);
-
-        		var product = results[0];
-
-					var categories = categoryList.map(function(category){
-						return {
-							id : category.id,
-							Category_name : category.Category_name,
-							selected : category.id === product.Category_id
-						}
-					});
 
     			res.render( 'products', {
     				products : results,
     				mostPopularProduct : mostPopularProduct,
     				leastPopularProduct : leastPopularProduct,
-    				categories : categories
-    					
-    					});
-     	 			});
-				});
 
+
+    				});
+     	 		});
 			});
 		});
 	});
@@ -124,35 +107,35 @@ exports.showEdit = function (req, res, next) {
 	});
 };
 
-exports.showProdCatsForSpecProd = function(req,res,next){
-	rreq.getConnection(function(err, connection){
+// exports.showProdCatsForSpecProd = function(req,res,next){
+// 	rreq.getConnection(function(err, connection){
 		
-		var id = req.params.id;
-    	connection.query('SELECT id, Category_name from Categories_td', [], function(err, categoryList) {
-        	if (err)
-               	return next("Error Selecting : %s ",err );
+// 		var id = req.params.id;
+//     	connection.query('SELECT id, Category_name from Categories_td', [], function(err, categoryList) {
+//         	if (err)
+//                	return next("Error Selecting : %s ",err );
          
-         		connection.query('SELECT * FROM Products_td WHERE id = ?', [id], function(err,rows){
-					if(err)return next(err);
+//          		connection.query('SELECT * FROM Products_td WHERE id = ?', [id], function(err,rows){
+// 					if(err)return next(err);
 
-					var product = rows[0];
+// 					var product = rows[0];
 
-					var categories = categoryList.map(function(category){
-						return {
-							id : category.id,
-							Category_name : category.Category_name,
-							selected : category.id === product.Category_id
-						}
-					});
+// 					var categories = categoryList.map(function(category){
+// 						return {
+// 							id : category.id,
+// 							Category_name : category.Category_name,
+// 							selected : category.id === product.Category_id
+// 						}
+// 					});
 
-					res.render('products', { 
-						products : product,
-					 	categories:categories
-					});      
-				});
-      	});
-	});
-}
+// 					res.render('products', { 
+// 						products : product,
+// 					 	categories:categories
+// 					});      
+// 				});
+//       	});
+// 	});
+// }
 
 exports.update = function(req, res, next){
 
