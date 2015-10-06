@@ -11,7 +11,20 @@
     {{#each products}} 
         <tbody>
             <tr>
-        <td>{{Product_name}}</td>
+        <td name="Product_name">{{Product_name}}
+            <div class="well well-lg" name="Category_id">
+            {{#categories}}
+                {{#selected}}
+                <option value = "{{id}}" selected>{{Category_name}}</option>
+                {{/selected}}
+
+                {{^selected}}
+                <option value = "{{id}}" >{{Category_name}}</option>
+                {{/selected}}
+            {{/categories}}
+            </div>
+
+        </td>
         <td>
      <button type="button" class="btn btn-default" onClick="location.href='/products/edit/{{id}}'"><span class="glyphicon glyphicon-edit"></span> Edit</button>
      <button type="button" class="btn btn-danger" onClick="location.href='/products/delete/{{id}}'"><span class="glyphicon glyphicon-remove"></span> Remove</button>
