@@ -58,6 +58,13 @@ transition:width .05s linear;
 z-index:1000;
 }
 
+.well-lg {
+    padding: 5px;
+    border-radius: 6px;
+    background-color: skyblue;
+}
+}
+
 .panel-body {
     padding: inherit;
     background-color: skyblue;
