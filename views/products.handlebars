@@ -12,17 +12,8 @@
         <tbody>
             <tr>
         <td name="Product_name">{{Product_name}}
-            <div class="well well-lg" name="Category_id">
-            {{#categories}}
-                {{#selected}}
-                <option value = "{{id}}" selected>{{Category_name}}</option>
-                {{/selected}}
-
-                {{^selected}}
-                <option value = "{{id}}" >{{Category_name}}</option>
-                {{/selected}}
-            {{/categories}}
-            </div>
+            <div class="well well-lg" name="Category_name">{{Category_name}}
+        </div>
 
         </td>
         <td>
