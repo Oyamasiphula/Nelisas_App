@@ -19,43 +19,39 @@ exports.show = function (req, res, next) {
 			if (err) 
 					return next(err);
 
-		connection.query(findleastPopularProductQuery, [], function(err, leastPopularProduct){
-			if (err) 
-					return next(err);
+			connection.query(findleastPopularProductQuery, [], function(err, leastPopularProduct){
+				if (err) 
+						return next(err);
 
-		connection.query('SELECT * FROM Products_td INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id', [id], function(err, results) {
-        	if (err) 
-        			return next(err);
+				connection.query('SELECT Products_td.id, Product_name, Category_name FROM Products_td INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id', [], function(err, results) {
+		        	if (err) 
+		        			return next(err);
 
-    			res.render( 'products', {
-    				products : results,
-    				mostPopularProduct : mostPopularProduct,
-    				leastPopularProduct : leastPopularProduct,
-
-
-    				});
-     	 		});
+		    			res.render( 'products', {
+		    				products : results,
+		    				mostPopularProduct : mostPopularProduct,
+		    				leastPopularProduct : leastPopularProduct
+		    				});
+		     	 		});
+					});
 			});
-		});
 	});
 };
 
 exports.add = function (req, res, next) {
 	req.getConnection(function(err, connection){
-		if (err) 
-				return next(err);
-
+	
 		var input = JSON.parse(JSON.stringify(req.body));
 		var data = {
             Product_name : input.Product_name,
             Category_id : input.Category_id
-        };
+      };
 
 		connection.query('insert into Products_td set ?', data, function(err, results) {
         	if (err)
               		return next("Error inserting : %s ",err );
 
-          	res.redirect('/products');
+          		res.redirect('/products');
       	});
 	});
 };
@@ -107,36 +103,6 @@ exports.showEdit = function (req, res, next) {
 	});
 };
 
-// exports.showProdCatsForSpecProd = function(req,res,next){
-// 	rreq.getConnection(function(err, connection){
-		
-// 		var id = req.params.id;
-//     	connection.query('SELECT id, Category_name from Categories_td', [], function(err, categoryList) {
-//         	if (err)
-//                	return next("Error Selecting : %s ",err );
-         
-//          		connection.query('SELECT * FROM Products_td WHERE id = ?', [id], function(err,rows){
-// 					if(err)return next(err);
-
-// 					var product = rows[0];
-
-// 					var categories = categoryList.map(function(category){
-// 						return {
-// 							id : category.id,
-// 							Category_name : category.Category_name,
-// 							selected : category.id === product.Category_id
-// 						}
-// 					});
-
-// 					res.render('products', { 
-// 						products : product,
-// 					 	categories:categories
-// 					});      
-// 				});
-//       	});
-// 	});
-// }
-
 exports.update = function(req, res, next){
 
 	var data = JSON.parse(JSON.stringify(req.body));
@@ -156,9 +122,9 @@ exports.delete = function(req, res, next){
 	var id = req.params.id;
 	req.getConnection(function(err, connection){
 
-		connection.query('DELETE FROM Products_td WHERE id = ?', [id], function(err,rows){
+		connection.query('DELETE FROM Products_td WHERE id = ?', id, function(err,rows){
 			if(err)
-    				return next("Error Selecting : %s ",err );
+				return next("Error Selecting : %s ",err );
 			
 			res.redirect('/products');
 		});
@@ -171,7 +137,7 @@ exports.showPopularProduct = function(req, res, next){
 		
 		connection.query('SELECT SUM(qTy) AS Quantity, Product_id ,Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id GROUP BY Product_name ORDER BY SUM(qTy) DESC LIMIT 0,1', [], function(err, results){
 		if (err) 
-			return next(err);
+					return next(err);
     	
     		res.render( 'products', {
     			mostPopularProduct : results
