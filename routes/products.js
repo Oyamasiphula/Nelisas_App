@@ -49,7 +49,7 @@ exports.add = function (req, res, next) {
 
 		connection.query('insert into Products_td set ?', data, function(err, results) {
         	if (err)
-              		return next("Error inserting : %s ",err );
+              		return next("Error inserting : %s ", err);
 
           		res.redirect('/products');
       	});
