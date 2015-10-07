@@ -7,7 +7,8 @@ var express = require('express'),
  	bodyParser = require('body-parser'),
  	session = require('express-session'),	 
  	products = require('./routes/products'),
- 	productsCategories = require('./routes/categories');
+ 	productsCategories = require('./routes/categories'),
+ 	sales = require('./routes/sales');
 
 
 var app = express();
@@ -48,6 +49,9 @@ app.get('/', function(req, res){
 }); 
 
 
+// Creating routes with templates...
+
+// products routes
 app.get('/products/', products.show);
 // app.get('/products/', products.showProdCatsForSpecProd);
 app.get('/products/edit/:id', products.showEdit);
@@ -56,8 +60,7 @@ app.get('/products/add/', products.showAdd);
 app.post('/products/add/', products.add);
 app.get('/products/delete/:id', products.delete);
 
- // Creating routes with templates...
-
+// productsCategories routes
 app.get('/addProductsCategories' , function(req, res){
 	//Create routes
 	res.render('addProductsCategories');	
@@ -68,7 +71,10 @@ app.get('/productsCategories/edit/:id', productsCategories.get);
 app.post('/productsCategories/update/:id', productsCategories.update);
 app.post('/productsCategories/add/', productsCategories.add);
 app.get('/productsCategories/delete/:id', productsCategories.delete);
-// app.get('/productsCategories', productsCategories.showLeastPopularProduct);
+
+// Sales routes
+app.get('/sales', sales.show);
+
 
 
 /*we call "getProductCategories()" therefore "findCatNames = productCategories.findProductCategories();"is being excetuted -
