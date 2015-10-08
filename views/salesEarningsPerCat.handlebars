@@ -1,0 +1,33 @@
+<div class="row"> 
+    <div class="col-xs-7 col-md-7 ">
+        <table class="table table-bordered">
+    <thead class="label-info">
+        <tr>
+        <th><h3>Category Name</h3></th>
+        <th><h3>Earnings Per Category</h3></th>
+        </tr>
+    </thead>
+    {{#sumOfEarningsPerCategory}} 
+        <tbody>
+            <tr>
+        <td>{{Category_name}}</td>
+        <td>
+         R{{Tot_Earnings_Per_Product}}
+        </td>
+            </tr>
+        </tbody>
+    {{/sumOfEarningsPerCategory}}
+        </table>
+        </div>
+
+        <style type="text/css">
+       
+
+td, th {
+    padding: 0;
+    color: floralwhite;
+    font-variant: small-caps;
+    text-align: center;
+    font-size: x-large;
+}
+        </style>
