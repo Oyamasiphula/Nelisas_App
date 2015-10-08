@@ -1,0 +1,37 @@
+<div class="row"> 
+    <div class="col-xs-7 col-md-7 ">
+        <table class="table table-bordered">
+    <thead class="label-info">
+        <tr>
+        <th><h3>Category Name</h3></th>
+        <th><h3>Earnings per Product</h3></th>
+        <th><h3>Earnings Per Category</h3></th>
+        </tr>
+    </thead>
+    {{#sumOfEarnings}} 
+        <tbody>
+            <tr>
+        <td>{{Category_name}}</td>
+        <td>{{Product_name}}</td>
+        <td>
+         R{{Tot_Earnings_Per_Product}}
+        </td>
+            </tr>
+        </tbody>
+    {{/sumOfEarnings}}
+        </table>
+        <div><span class="glyphicon glyphicon-plus"></span><button type="button" class="btn btn-success" onClick="location.href='/addProductsCategories'">New Category</button>
+    </div>
+        </div>
+
+        <style type="text/css">
+       
+
+td, th {
+    padding: 0;
+    color: floralwhite;
+    font-variant: small-caps;
+    text-align: center;
+    font-size: x-large;
+}
+        </style>
