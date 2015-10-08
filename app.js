@@ -74,6 +74,8 @@ app.get('/productsCategories/delete/:id', productsCategories.delete);
 
 // Sales routes
 app.get('/sales', sales.show);
+app.get('/salesSummary/showCategories', sales.showCategories);
+app.get('/salesSummary/EarningsPerCategory', sales.EarningsPerCategory);
 
 
 
