@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/freelancer.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	<link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 	<link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
@@ -39,27 +40,37 @@
 
 	<div class="container">
     	{{{body}}}
-      <div>
+      <!-- </div> -->
       <div class="area"></div>
       <nav class="main-menu">
             <ul>
-                <li class="has-subnav">
-                    <a href="/sales">
-                       <i class="fa fa-list fa-2x"></i>
+            <li class="has-subnav">
+                <a href="/sales">
+                   <i class="fa fa-list fa-2x"></i>
                         <span class="nav-text">
-                            Sales
-                        </span>
-                    </a>
-                    
+                            Products Sales
+                    </span>
+                </a>    
+            </li>
+                <li>
+                  <a href="/salesSummary/showCategories">
+                  <i class="fa fa-gg-circle fa-lg"></i> Sales Categories Summary
+                  </a>
                 </li>
-                <li class="has-subnav">
-                    <a href="#">
+            <li>
+                  <a href="/salesSummary/EarningsPerCategory">
+                  <i class="fa fa-gg-circle fa-lg"></i>Earnings Per Category
+                  </a>
+            </li>
+                <ul>
+                  <li class="has-subnav">
+                      <a href="#">
                        <i class="fa fa-folder-open fa-2x"></i>
                         <span class="nav-text">
                             Products Profile</span>     
-                    </a>
-                   
-                </li>
+                      </a>
+                  </li>
+              </ul>
                 <li>
                     <a href="#">
                         <i class="fa fa-bar-chart-o fa-2x"></i>
@@ -142,7 +153,7 @@
               <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
             </li>
         </ul>
-        
+
       <h4>Follow US Here</h4>
       <div class="footer-below">
     Copyright © Nelisas_App 2015
