@@ -175,13 +175,13 @@ header .intro-text .skills {
     font-weight: 300;
 }
 
-body > div.container > div.row > div.col-xs-7.col-md-7{
+/*body > div.container > div.row > div.col-xs-7.col-md-7{
 
     position: relative;
     min-height: 1px;
     padding-left: 188px;
     padding-right: 6px;
-}
+}*/
 
 .Home-but {
   padding: 13px;
