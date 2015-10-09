@@ -13,7 +13,6 @@ exports.show = function(req, res, next){
 						Sales : results
 					});			
 				});
-
 			});
 
 	}
