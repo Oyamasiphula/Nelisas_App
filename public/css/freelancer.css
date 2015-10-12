@@ -327,6 +327,12 @@ margin: 0.5px;
     padding-left: 58px;
     position: inherit;
 }
+
+.col-sm-6 {
+    width: 58%;
+    padding-left: 191px;
+}
+
 td, th {
   padding: 0;
   color: floralwhite;
