@@ -8,7 +8,8 @@ var express = require('express'),
  	session = require('express-session'),	 
  	products = require('./routes/products'),
  	productsCategories = require('./routes/categories'),
- 	sales = require('./routes/sales');
+ 	sales = require('./routes/sales'),
+ 	salesProfits = require('./routes/salesProfits');
 
 
 var app = express();
@@ -76,6 +77,8 @@ app.get('/productsCategories/delete/:id', productsCategories.delete);
 app.get('/sales', sales.show);
 app.get('/salesSummary/showCategories', sales.showCategories);
 app.get('/salesSummary/EarningsPerCategory', sales.EarningsPerCategory);
+
+app.get('/salesProfits' ,salesProfits.show)
 
 
 
