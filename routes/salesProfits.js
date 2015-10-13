@@ -5,8 +5,8 @@ exports.show = function(req, res, next){
 
 		req.getConnection(function(err, connection){
 
-		connection.query('SELECT Sales_td.Product_id, SUM(Sales_td.qTy * Sales_td.product_price) AS Tot_Earnings_Per_Product, Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id group by Product_id' ,function(err ,result){
-			console.log(result[0]);
+		connection.query('SELECT Products_td.id,Products_td.Product_name, (SELECT SUM(Sales_td.qTy * Sales_td.product_price) FROM Sales_td WHERE Product_id = Products_td.id)-(SELECT SUM(Purchases_td.qTy * Purchases_td.product_price) FROM Purchases_td WHERE Product_id = Products_td.id) AS Profits FROM Products_td GROUP BY Products_td.id' ,function(err ,result){
+			console.log(result);
 			if(err) 
 					return next("error selecting : %s", err)
 

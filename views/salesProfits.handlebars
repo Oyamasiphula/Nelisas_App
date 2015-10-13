@@ -5,7 +5,7 @@
         
                 <tr>
                     <th><h3>Product Name</3></th>
-                    <th><h3>Earnings Per Product</3></th>
+                    <th><h3>Product Profit</3></th>
                     <!-- <th><h3>Manage</3></th> -->
                 </tr>
             </thead>
@@ -14,7 +14,7 @@
                 <tr>
                     <td name="Product_name"><div class="well well-lg" >{{Product_name}}</div>
                     </td>
-                    <td name="product_price">R{{Tot_Earnings_Per_Product}}
+                    <td name="product_price">R{{Profits}}
                     </td>
                     <!-- <td>
                      <button type="button" class="btn btn-default" onClick="location.href='/products/edit/{{id}}'"><span class="glyphicon glyphicon-edit"></span> Edit</button>
@@ -29,3 +29,12 @@
             </div>   
     </div>
 </div>
+
+<style type="text/css">
+.well-lg {
+    padding: 5px;
+    border-radius: 6px;
+    background-color: #000D23;
+    display: -webkit-inline-box;
+}
+</style>
