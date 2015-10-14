@@ -1,5 +1,5 @@
 <div class="row"> 
-    <div class="col-xs-10" style="float:right">
+    <div class="col-sm-6">
         <table class="table table-bordered">
             <thead class="label-info">
         
@@ -28,7 +28,24 @@
                 <span class="glyphicon glyphicon-plus"></span><button type="button" class="btn btn-success" onClick="location.href='products/add'">+ Add Sales +</button>
             </div>   
     </div>
+
+    <div class="col-sm-5" style ="float: right">
+          <div class="panel panel-success">
+            <div class="panel-heading">
+            <h3 class="panel-title"><strong><i class="fa fa-thumbs-o-up fa-2x" ></i> Most Profitable Product</strong></h3>
+            </div>
+        <div class="panel-body">
+                {{#bestProduct}}
+            <p><h4 class="label-info"><strong>Product name :</strong>{{Product_name}}</p>
+            <p ><h4 class="label-info"><strong>Profit Amaunt :</strong>{{Profits}}</p>
+                {{/bestProduct}}
+        </div>
+        </div>
+          <br>
+    </div>
 </div>
+
+
 
 <style type="text/css">
 .well-lg {
