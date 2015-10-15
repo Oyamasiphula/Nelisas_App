@@ -25,19 +25,3 @@ exports.show = function(req, res, next){
 	})
 
 }
-
-
-// exports.showMostProfitableProd = function(req, res, next){
-			
-// 			var id = req.params.id;
-// 			var data = JSON.parse(JSON.stringify(req.body));
-
-// 		req.getConnection(function(err,connection){
-// 				connection.query('',function(err,result){
-
-
-// 				})
-
-// 		})
-
-// }
