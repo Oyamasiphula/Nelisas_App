@@ -1,6 +1,6 @@
 'use strict';
 
-var express = require('express'),
+ var express = require('express'),
  	exphbs = require('express-handlebars'),
  	mysql = require('mysql'),
  	myConnection = require('express-myconnection'),
@@ -85,6 +85,7 @@ app.get('/salesProfits' ,salesProfits.show)
 /*we call "getProductCategories()" therefore "findCatNames = productCategories.findProductCategories();"is being excetuted -
 by having original function's method for that instance new variable is must be created so that we prevent to get error of undefined values*/
 // 	 
+
 app.get('/message' , function(req, res){
 	//Create routes
 	res.send('I got it !!!');
