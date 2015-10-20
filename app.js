@@ -9,6 +9,7 @@
  	products = require('./routes/products'),
  	productsCategories = require('./routes/categories'),
  	sales = require('./routes/sales'),
+ 	search = require('./routes/searchQuery'),
  	salesProfits = require('./routes/salesProfits');
 
 
@@ -51,6 +52,13 @@ app.get('/', function(req, res){
 
 
 // Creating routes with templates...
+// app.post('/products/search/:id', search.update)
+
+app.get('/products/search/',search.searchQuery)
+app.post('/products/search/:id',function(req, res){
+	res.render('search')
+
+})
 
 // products routes
 app.get('/products/', products.show);

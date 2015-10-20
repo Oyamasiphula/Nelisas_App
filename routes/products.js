@@ -15,28 +15,33 @@ exports.show = function (req, res, next) {
 		var categoriesDataPullReq = 'SELECT id, Category_name from Categories_td';
 
 
-		connection.query(findMostPopularProductQuery, [], function(err, mostPopularProduct){
-			if (err) 
-					return next(err);
+				connection.query(findMostPopularProductQuery, [], function(err, mostPopularProduct){
+					if (err) 
+							return next(err);
 
-			connection.query(findleastPopularProductQuery, [], function(err, leastPopularProduct){
-				if (err) 
-						return next(err);
+					connection.query(findleastPopularProductQuery, [], function(err, leastPopularProduct){
+						if (err) 
+								return next(err);
+
+						connection.query('SELECT Products_td.id, Product_name, Category_name FROM Products_td INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id', [], function(err, results) {
+				        	if (err) 
+				        			return next(err);
 
 				connection.query('SELECT Products_td.id, Product_name, Category_name FROM Products_td INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id', [], function(err, results) {
-		        	if (err) 
-		        			return next(err);
+				        	if (err) 
+				        			return next(err);
 
-		    			res.render( 'products', {
-		    				products : results,
-		    				mostPopularProduct : mostPopularProduct,
-		    				leastPopularProduct : leastPopularProduct
-		    				});
-		     	 		});
+				    			res.render( 'products', {
+				    				products : results,
+				    				mostPopularProduct : mostPopularProduct,
+				    				leastPopularProduct : leastPopularProduct
+				    				});
+				     	 		});
+							});
 					});
 			});
-	});
-};
+		});
+}
 
 exports.add = function (req, res, next) {
 	req.getConnection(function(err, connection){

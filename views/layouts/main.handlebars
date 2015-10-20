@@ -16,7 +16,18 @@
    <!--  <link rel="stylesheet" href="/css/sweetalert.css"> -->
   <!--.......................-->
 <!-- Dropdown menu -->
- 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="/js/typeahead.min.js"></script>
+
+<script type="text/javascript">
+ $('input.typeahead').typeahead({
+  classNames: {
+    input: 'Typeahead',
+    hint: 'Typeahead-hint',
+    remote: 'http://localhost:2001/products/search?key=%QUERY',
+  }
+});
+ </script>
  
 		</head>
 		<!-- Dropdown menu -->
@@ -43,8 +54,8 @@
 
 
     "><section class="webdesigntuts-workshop">
-  <form action="" method="">        
-    <input type="search" placeholder="What are you looking for?">         
+  <form action="/products/search/:id" method="POST">        
+    <input type="text" name="typeahead" class="typeahead tt-query" Typeahead-input type="search" placeholder="What are you looking for?">         
     <button>Search</button>
   </form>
 </section>
