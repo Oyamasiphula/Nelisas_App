@@ -9,7 +9,7 @@
  	products = require('./routes/products'),
  	productsCategories = require('./routes/categories'),
  	sales = require('./routes/sales'),
- 	search = require('./routes/searchQuery'),
+ 	// search = require('./routes/searchQuery'),
  	salesProfits = require('./routes/salesProfits');
 
 
@@ -37,7 +37,7 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 
-app.use(express.static(__dirname + '/public' ));
+app.use(express.static(__dirname + '/public'));
 
 
 app.use(myConnection(mysql, dbOptions, 'single'));
@@ -51,18 +51,9 @@ app.get('/', function(req, res){
 }); 
 
 
-// Creating routes with templates...
-// app.post('/products/search/:id', search.update)
-
-app.get('/products/search/',search.searchQuery)
-app.post('/products/search/:id',function(req, res){
-	res.render('search')
-
-})
-
 // products routes
 app.get('/products/', products.show);
-// app.get('/products/', products.showProdCatsForSpecProd);
+app.get('/products/search/:query',products.search);
 app.get('/products/edit/:id', products.showEdit);
 app.post('/products/edit/:id', products.update);
 app.get('/products/add/', products.showAdd);
@@ -76,6 +67,7 @@ app.get('/addProductsCategories' , function(req, res){
 });
 
 app.get('/productsCategories', productsCategories.show);
+app.get('/productsCategories/search/:query',productsCategories.searchCategories)
 app.get('/productsCategories/edit/:id', productsCategories.get);
 app.post('/productsCategories/update/:id', productsCategories.update);
 app.post('/productsCategories/add/', productsCategories.add);

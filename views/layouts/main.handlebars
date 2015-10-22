@@ -3,7 +3,6 @@
 	<head>
 
 			<title>Nelisa's App</title>
-  <!--  <script src="/js/jquery-2.1.3.js"></script>-->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/freelancer.css">
@@ -11,58 +10,31 @@
 	<link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 	<link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script> 
+  <script type="text/javascript" src="/js/search.js"></script>
+
    <!-- This is what I need for alerts -->
    <!--  <script src="/js/sweetalert-dev.js"></script> -->
    <!--  <link rel="stylesheet" href="/css/sweetalert.css"> -->
   <!--.......................-->
 <!-- Dropdown menu -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="/js/typeahead.min.js"></script>
-
-<script type="text/javascript">
- $('input.typeahead').typeahead({
-  classNames: {
-    input: 'Typeahead',
-    hint: 'Typeahead-hint',
-    remote: 'http://localhost:2001/products/search?key=%QUERY',
-  }
-});
- </script>
  
 		</head>
 		<!-- Dropdown menu -->
-  <body class="bg" background="/img/Wallpaper.jpg">
+<body class="bg" background="/img/Wallpaper.jpg">
   <button class="Home-but"><a href="/"><span class="glyphicon glyphicon-home"></span>Nelisa's Spaza</a></button>
-  
   <div id='cssmenu'>
-    <ul>
+      <ul>
           <li class='has-sub'><a href='/products'><span class="glyphicon glyphicon-th-list"></span> Products</a>
-              <!-- ul>
-                  <li><a href='#'>Most popular product</a></li>
-                  <li><a href='#'>Least popular product</a></li>
-              </ul> -->
           </li>
           <li><a href='/productsCategories'><span class="glyphicon glyphicon-th-list"></span> Categories</a></li>
           <li><a href='#'>About</a></li>
           <li><a href='#'>Contact</a></li>
       </ul>
-
   </div>
 
-	<div class="container">
-    <div class="row
-
-
-    "><section class="webdesigntuts-workshop">
-  <form action="/products/search/:id" method="POST">        
-    <input type="text" name="typeahead" class="typeahead tt-query" Typeahead-input type="search" placeholder="What are you looking for?">         
-    <button>Search</button>
-  </form>
-</section>
-  </div>
+    <div class="container">
     	{{{body}}}
-      <!-- </div> -->
-      <div class="area"></div>
       <nav class="main-menu">
             <ul>
             <li class="has-subnav">
@@ -137,10 +109,10 @@
                     </a>
                 </li>  
             </ul>
-        </nav></div>  
-    </div>
-
-  </body>
+        </nav>
+    </div>  
+  </div>
+</body>
 
   
     <footer>
