@@ -11,8 +11,7 @@ exports.searchCategories = function(req, res, next){
 
         var CategoryName = 'SELECT Category_name from Categories_td WHERE Category_name LIKE ?';
         
-        connection.query(CategoryName,[pullCatNameReq, pullCatNameReq],function(err, catNameAsResult){
-            console.log()
+        connection.query(CategoryName, [pullCatNameReq, pullCatNameReq],function(err, catNameAsResult){
 
                 res.render('searchCategories',{
                     categoryName : catNameAsResult,
