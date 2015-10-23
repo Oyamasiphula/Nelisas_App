@@ -1,0 +1,29 @@
+
+    <div class="col-xs-10" style="float:right">
+        <table class="table table-bordered" id="reqSumOfProductsEarningsOutPut">
+            <thead class="label-info">
+        
+                <tr>
+                    <th><h3>Product Name</3></th>
+                    <th><h3>Earnings Per Product</3></th>
+                    <!-- <th><h3>Manage</3></th> -->
+                </tr>
+            </thead>
+                    {{#findProductNames}} 
+            <tbody>
+                <tr>
+                    <td name="Product_name"><div class="well well-lg">{{Product_name}}</div>
+                    </td>
+                    <td name="Tot_Earnings_Per_Product">R{{Tot_Earnings_Per_Product}}
+                    </td>
+                    <!-- <td>
+                     <button type="button" class="btn btn-default" onClick="location.href='/products/edit/{{id}}'"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                     <button type="button" class="btn btn-danger" onClick="location.href='/products/delete/{{id}}'"><span class="glyphicon glyphicon-remove"></span> Remove</button>
+                    </td> -->
+                </tr>
+            </tbody>
+                    {{/findProductNames}}
+        </table>
+            <div>
+                <span class="glyphicon glyphicon-plus"></span><button type="button" class="btn btn-success" onClick="location.href='products/add'">+ Add Sales +</button>
+            </div>  
