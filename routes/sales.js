@@ -1,3 +1,25 @@
+exports.searchSales = function(req, res, next){
+	req.getConnection(function(err, connection){
+
+			var pullProductsEarnings = req.params.query;
+				pullProductsEarnings = '%' + pullProductsEarnings + '%';
+
+		connection.query('SELECT id,Product_name, Category_name FROM (SELECT Products_td.id,Products_td.Product_name, Categories_td.Category_name, Products_td.Category_id FROM Products_td, Categories_td where Products_td.Category_id = Categories_td.id) AS prods_cats WHERE Product_name LIKE ? OR Category_name LIKE ?',[pullProductsEarnings, pullProductsEarnings],function(err, productsEarningsResults){
+					console.log(productsEarningsResults)
+				if(err)
+						return next("error selecting : %s ", err)
+
+
+			res.render('searchProductsEarnings',{
+				findProductNames : productsEarningsResults,
+				layout : false
+			})
+		})
+
+	})
+
+}
+
 exports.show = function(req, res, next){
 			
 	var id = req.params.id;
