@@ -1,0 +1,25 @@
+<div class="row"> 
+    <div class="col-sm-6">
+        <table class="table table-bordered" id="reqSumOfProductsEarningsOutPut">
+    <thead class="label-info">
+        <tr>
+        <th><h3>Category Name</h3></th>
+        <th><h3>Product name</h3></th>
+        <th><h3>Total Earnings</h3></th>
+        </tr>
+    </thead>
+    {{#sumOfEarnings}} 
+        <tbody>
+            <tr>
+        <td><div class="well well-lg" >{{Category_name}}</div></td>
+        <td><div class="well well-lg" >{{Product_name}}</div></td>
+        <td>
+         R{{Tot_Earnings_Per_Product}}
+        </td>
+            </tr>
+        </tbody>
+    {{/sumOfEarnings}}
+        </table>
+        <div><span class="glyphicon glyphicon-plus"></span><button type="button" class="btn btn-success" onClick="location.href='/addProductsCategories'">New Category</button>
+    </div>
+        </div>
