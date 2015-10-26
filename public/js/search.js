@@ -3,7 +3,7 @@
 $(document).ready(function(){
 //Products Search
 	$("#productPullReq").keyup(function(){
-		var productPullReq = $("#productPullReq").val();
+	var productPullReq = $("#productPullReq").val();
 		$.get("/products/search/" + productPullReq, function(results){
 			$("#reqProductsOutPut").html(results);
 		});
@@ -21,10 +21,10 @@ $(document).ready(function(){
 		$("#pullProductsEarnings").keyup(function(){
 		var pullProductsEarnings = $("pullProductsEarnings").val();
 			$.get("/sales/search/" + pullProductsEarnings, function(results){
-				$("#reqSumOfProductsEarningsOutPut").html(results);
+				$("#reqSumOfProductsEarning").html(results);
 
-			})
-		})
+			});
+		});
 
 });	
 
