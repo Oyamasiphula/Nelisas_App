@@ -1,16 +1,15 @@
 exports.searchSales = function(req, res, next){
 	req.getConnection(function(err, connection){
 
-			var pullProductsEarnings = req.params.query,
+			var pullProductsEarnings = req.params.query;
 				pullProductsEarnings = '%' + pullProductsEarnings + '%';
 
-		connection.query(' SELECT Sales_td.Product_id ,Products_td.Product_name, SUM(Sales_td.qTy * Sales_td.product_price) AS Tot_Earnings_Per_Product, Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id WHERE Products_td.Product_name LIKE ?',[pullProductsEarnings, pullProductsEarnings],function(err, results){
-				console.log(results)
+		connection.query('SELECT Sales_td.Product_id, SUM(Sales_td.qTy * Sales_td.product_price) AS Tot_Earnings_Per_Product, Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id WHERE Products_td.Product_name LIKE ?', [pullProductsEarnings,pullProductsEarnings], function(err, results){
 				if(err)
 					return next("error selecting : %s ", err)
 
 				res.render('searchProductsEarnings',{
-					Sales : results,
+					searchSalesVals : results,
 					layout : false
 				})
 			})
