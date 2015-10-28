@@ -11,10 +11,9 @@ $(document).ready(function(){
 
 					//Category Search
 		$("#pullCatNameReq").keyup(function(){
-		var pullCatNameReq = $("#pullCatNameReq").val();
+			var pullCatNameReq = $("#pullCatNameReq").val();
 			$.get("/productsCategories/search/" + pullCatNameReq, function(results){
-				$("#reqCategoriesOutPut").html(results);
-				
+					$("#reqCategoriesOutPut").html(results);
 			});
 		});
 
@@ -23,8 +22,20 @@ $(document).ready(function(){
 			var pullProductsEarnings = $("#pullProductsEarnings").val();
 			$.get("/sales/search/" + pullProductsEarnings, function(results){
 				$("#reqSumOfProductsEarning").html(results);
-
 			});
+				
+				if (pullProductsEarnings === true) {
+					$.get("/sales/search/" + pullProductsEarnings, function(results){
+						$("#reqSumOfProductsEarning").html(results);
+					});
+
+				} else if(pullProductsEarnings === "" || '%'+undefined+'%'){
+					$.get("/sales" + pullProductsEarnings, function(results){
+						$("#sumOfProductsEarning").html(results);
+					});
+
+			};
+			
 		});
 
 });	
