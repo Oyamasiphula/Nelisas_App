@@ -17,9 +17,10 @@ $(document).ready(function(){
 				
 			});
 		});
+
 				// sales search
 		$("#pullProductsEarnings").keyup(function(){
-		var pullProductsEarnings = $("pullProductsEarnings").val();
+			var pullProductsEarnings = $("#pullProductsEarnings").val();
 			$.get("/sales/search/" + pullProductsEarnings, function(results){
 				$("#reqSumOfProductsEarning").html(results);
 
