@@ -78,6 +78,7 @@ app.get('/sales', sales.show);
 // app.get('/sales/search/all', sales.initSearchSales);
 app.get('/sales/search/:query', sales.searchSales);
 app.get('/salesSummary/showCategories', sales.showCategories);
+app.get('/salesSummary/search/:query', sales.searchSalesSum);
 app.get('/salesSummary/EarningsPerCategory', sales.EarningsPerCategory);
 
 app.get('/salesProfits' ,salesProfits.show)

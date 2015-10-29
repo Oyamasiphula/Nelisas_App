@@ -1,8 +1,8 @@
 <div class="row">
   <section class="webdesigntuts-workshop">
    <form>
-    <label for="productPullReq">Search</label>
-    <input class='searchbar' id="productPullReq" name="Product_name" placeholder="Search Product">         
+    <label for="pullSumOfEarnings">Search</label>
+    <input class='searchtextBox' id="pullSumOfEarnings" name="Product_name" placeholder="Search Product/Category">         
        </form>
   </section>
   </div>
@@ -20,8 +20,8 @@
     {{#sumOfEarnings}} 
         <tbody>
             <tr>
-        <td><div class="well well-lg" >{{Category_name}}</div></td>
-        <td><div class="well well-lg" >{{Product_name}}</div></td>
+        <td><div class="well well-lg" name="Category_name" >{{Category_name}}</div></td>
+        <td><div class="well well-lg" name="Product_name" >{{Product_name}}</div></td>
         <td>
          R{{Tot_Earnings_Per_Product}}
         </td>

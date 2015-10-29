@@ -5,11 +5,32 @@ exports.searchSales = function(req, res, next){
 				pullProductsEarnings = '%' + pullProductsEarnings + '%';
 
 		connection.query('SELECT Sales_td.Product_id, SUM(Sales_td.qTy * Sales_td.product_price) AS Tot_Earnings_Per_Product, Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id WHERE Products_td.Product_name LIKE ?', [pullProductsEarnings,pullProductsEarnings], function(err, results){
+				console.log(results)
 				if(err)
 					return next("error selecting : %s ", err)
 
 				res.render('searchProductsEarnings',{
 					searchSalesVals : results,
+					layout : false
+				})
+			})
+
+		})
+
+}
+
+exports.searchSalesSum = function(req, res, next){
+	req.getConnection(function(err, connection){
+
+			var pullSumOfEarnings = req.params.query;
+				pullSumOfEarnings = '%' + pullSumOfEarnings + '%';
+
+		connection.query('SELECT Categories_td.Category_name, SUM(Sales_td.qTy * Sales_td.product_price) AS Tot_Earnings_Per_Product, Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id WHERE Products_td.Product_name LIKE ? group by Products_td.Product_name', [pullSumOfEarnings,pullSumOfEarnings], function(err, results){
+				if(err)
+					return next("error selecting : %s ", err)
+
+				res.render('searchSalesSum',{
+					pullAllSales: results,
 					layout : false
 				})
 			})
@@ -25,7 +46,7 @@ exports.show = function(req, res, next){
 
 	req.getConnection(function(err,connection){
 
-		connection.query('SELECT Sales_td.Product_id, SUM(Sales_td.qTy * Sales_td.product_price) AS Tot_Earnings_Per_Product, Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id group by Product_id', [],function(err,results){
+		connection.query('SELECT Categories_td.Category_name, SUM(Sales_td.qTy * Sales_td.product_price) AS Tot_Earnings_Per_Product, Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id group by Products_td.Product_name', [],function(err,results){
 			if(err)
 				return next("error selecting : %s ", err);
 
