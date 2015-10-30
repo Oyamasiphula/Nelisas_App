@@ -115,3 +115,41 @@ exports.EarningsPerCategory = function(req, res, next){
 	});
 
 }
+
+exports.showAddSales = function(req, res, next){
+
+				res.render('addMoreSales');
+
+};
+
+exports.AddSales = function(req, res, next){
+	req.getConnection(function(err, connection){
+		var id = req.params.id;
+			var addMoreProduct = 'INSERT INTO Sales_td SET ? WHERE id = ?';
+
+		connection.query(addMoreProduct, [data,id], function(err, results){
+
+				res.render('addMoreSales',{
+					pushMoreSales : results
+				});
+
+		});
+
+	});
+
+};
+
+exports.update = function(req, res, next){
+
+	var data = JSON.parse(JSON.stringify(req.body));
+  	var id = req.params.id;
+
+  req.getConnection(function(err, connection){
+			connection.query('UPDATE Sales_td SET ? WHERE id = ?', [data, id], function(err, rows){
+    			if (err) next(err);
+
+          res.redirect('/sales');
+    		});
+
+    });
+};
