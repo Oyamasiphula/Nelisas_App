@@ -28,11 +28,10 @@ $(document).ready(function(){
 					$("#reqSumOfProductsEarning").html(results);
 				});
 
-			} 
-			else if(pullProductsEarnings === "" || false){
-				window.location.replace("http://localhost:2001/sales");
+				} else if(pullProductsEarnings === "" || false){
+					window.location.replace("http://localhost:2001/sales");
 
-		    };
+			      };
 
 	});
 
