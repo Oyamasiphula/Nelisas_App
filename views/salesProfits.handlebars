@@ -1,6 +1,14 @@
+<div class="row">
+      <section class="webdesigntuts-workshop">
+   <form>
+    <label for="pullProductProfit">Search</label>
+    <input class='searchbar' id="pullProductProfit" name="Product_name" placeholder="Search products">         
+       </form>
+</section>
+  </div>
 <div class="row"> 
     <div class="col-sm-6">
-        <table class="table table-bordered">
+        <table class="table table-bordered" id ="productNamesProfitsOutPutTd">
             <thead class="label-info">
         
                 <tr>
@@ -36,8 +44,8 @@
             </div>
         <div class="panel-body">
                 {{#bestProduct}}
-            <p><h4 class="label-info"><strong>Product 2name :</strong>{{Product_name}}</p>
-            <p ><h4 class="label-info"><strong>Profit Amaunt :</strong>{{Profits}}</p>
+            <p><h4 class="label-info"><strong>Product name :</strong>{{Product_name}}</p>
+            <p ><h4 class="label-info"><strong>Profit Amount :</strong>R{{Profits}}</p>
                 {{/bestProduct}}
         </div>
         </div>
