@@ -9,7 +9,6 @@
  	products = require('./routes/products'),
  	productsCategories = require('./routes/categories'),
  	sales = require('./routes/sales'),
- 	// search = require('./routes/searchQuery'),
  	salesProfits = require('./routes/salesProfits');
 
 
@@ -82,7 +81,8 @@ app.get('/salesSummary/showCategories/search/:query', sales.searchSalesSum);
 app.get('/salesSummary/EarningsPerCategory', sales.EarningsPerCategory);
 app.get('/salesSummary/EarningsPerCategory/search/:query', sales.searchEarningsPerCategory);
 
-app.get('/salesProfits' ,salesProfits.show)
+app.get('/salesProfits' ,salesProfits.show);
+app.get('/salesProfits/search/:query' ,salesProfits.searchProfitsPerProduct);
 
 
 
