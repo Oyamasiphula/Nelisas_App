@@ -38,23 +38,17 @@ exports.show = function (req, res, next) {
 	var categoriesDataPullReq = 'SELECT id, Category_name from Categories_td';
 
 				connection.query(findMostPopularProductQuery, [], function(err, mostPopularProduct){
-					if (err) 
-							return next("Error Selecting : %s ", err);
-
-
+				if (err) 
+						return next("Error Selecting : %s ", err);
 				connection.query(findleastPopularProductQuery, [], function(err, leastPopularProduct){
-						if (err) 
-								return next("Error Selecting : %s ", err);
-
-
+				if (err) 
+						return next("Error Selecting : %s ", err);
 				connection.query('SELECT Products_td.id, Product_name, Category_name FROM Products_td INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id', [], function(err, results) {
-				        	if (err) 
-				        			return next("Error Selecting : %s ", err);
-
-
+	        	if (err) 
+	        			return next("Error Selecting : %s ", err);
 				connection.query('SELECT Products_td.id, Product_name, Category_name FROM Products_td INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id', [], function(err, results) {
-				        	if (err) 
-				        			return next("Error Selecting : %s ", err);
+	        	if (err) 
+	        			return next("Error Selecting : %s ", err);
 
 
 				    			res.render( 'products', {
@@ -90,15 +84,13 @@ exports.add = function (req, res, next) {
 exports.showAdd = function (req, res, next) {
 
 	req.getConnection(function(err, connection){
-		
     	connection.query('SELECT * from Categories_td', [], function(err, results) {
         	if (err)
-              			return next("Error Selecting : %s ",err );
-         
-		          	res.render('addProduct', {
-		          		categories : results
-		         });
-		  });
+              	return next("Error Selecting : %s ",err );
+		      res.render('addProduct', {
+		        categories : results
+		      });
+		 });
 	});
 };
 

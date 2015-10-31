@@ -1,11 +1,9 @@
 <div class="col-sm-6">
     <table class="table table-bordered" id ="productNamesProfitsOutPutTd" >
         <thead class="label-info">
-    
             <tr>
                 <th><h3>Product Name</3></th>
                 <th><h3>Product Profit</3></th>
-                <!-- <th><h3>Manage</3></th> -->
             </tr>
         </thead>
                 {{#productNAmeAsAResult}} 
@@ -15,15 +13,8 @@
                 </td>
                 <td name="product_price">R{{Profits}}
                 </td>
-                <!-- <td>
-                 <button type="button" class="btn btn-default" onClick="location.href='/products/edit/{{id}}'"><span class="glyphicon glyphicon-edit"></span> Edit</button>
-                 <button type="button" class="btn btn-danger" onClick="location.href='/products/delete/{{id}}'"><span class="glyphicon glyphicon-remove"></span> Remove</button>
-                </td> -->
             </tr>
         </tbody>
                 {{/productNAmeAsAResult}}
     </table>
-       <!--  <div>
-            <span class="glyphicon glyphicon-plus"></span><button type="button" class="btn btn-success" onClick="location.href='products/add'">+ Add Sales +</button>
-        </div> -->   
 </div>

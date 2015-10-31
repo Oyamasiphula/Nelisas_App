@@ -28,10 +28,8 @@ app.use(myConnection(mysql, dbOptions, 'single'));
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
-
 app.use(session({secret: "Haha haha", saveUninitialized : false, resave: true, cookie : {maxAge : 5*60000}}));
 // app.set("x-powered-by", false);
-
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
@@ -49,7 +47,6 @@ app.get('/', function(req, res){
 	res.render('home')
 }); 
 
-
 // products routes
 app.get('/products/', products.show);
 app.get('/products/search/:query',products.search);
@@ -59,12 +56,11 @@ app.get('/products/add/', products.showAdd);
 app.post('/products/add/', products.add);
 app.get('/products/delete/:id', products.delete);
 
-// productsCategories routes
+	// productsCategories routes
 app.get('/addProductsCategories' , function(req, res){
 	//Create routes
 	res.render('addProductsCategories');	
 });
-
 app.get('/productsCategories', productsCategories.show);
 app.get('/productsCategories/search/:query',productsCategories.searchCategories)
 app.get('/productsCategories/edit/:id', productsCategories.get);
@@ -72,15 +68,21 @@ app.post('/productsCategories/update/:id', productsCategories.update);
 app.post('/productsCategories/add/', productsCategories.add);
 app.get('/productsCategories/delete/:id', productsCategories.delete);
 
-// Sales routes
-app.get('/sales', sales.show);
-// app.get('/sales/search/all', sales.initSearchSales);
+	// Sales routes
+app.get('/sales', sales.showSales);
 app.get('/sales/search/:query', sales.searchSales);
-app.get('/salesSummary/showCategories', sales.showCategories);
-app.get('/salesSummary/showCategories/search/:query', sales.searchSalesSum);
-app.get('/salesSummary/EarningsPerCategory', sales.EarningsPerCategory);
-app.get('/salesSummary/EarningsPerCategory/search/:query', sales.searchEarningsPerCategory);
+app.get('/sales/showAddSales/', sales.showAddSales)
+app.post('/sales/add', sales.add);
+app.get('/sales/edit/:id', sales.editSales);
+app.post('/sales/edit/:id/', sales.update);
 
+	// 2nd Sales route(s) for salesSummary
+app.get('/salesSummary/showCategories', sales.showCategories);
+app.get('/salesSummary/earningsPerCategory/search/:query', sales.searchEarningsPerCategory);
+app.get('/salesSummary/showCategories/search/:query', sales.searchSalesSum);
+app.get('/salesSummary/earningsPerCategory', sales.earningsPerCategory);
+
+	// 3nd Sales route(s) for salesProfits
 app.get('/salesProfits' ,salesProfits.show);
 app.get('/salesProfits/search/:query' ,salesProfits.searchProfitsPerProduct);
 

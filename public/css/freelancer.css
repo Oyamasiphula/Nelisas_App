@@ -46,7 +46,6 @@ font-size:20px;
   height: 100%;
   position: absolute;
   text-align: center;
-  width: 100%;
 }
 
 .webdesigntuts-workshop:before, .webdesigntuts-workshop:after {
@@ -542,6 +541,10 @@ margin: 0.5px;
 .col-sm-6 {
     width: 58%;
     padding-left: 191px;
+}
+
+input[type="date"], input[type="time"], input[type="datetime-local"], input[type="month"] {
+    line-height: 10px;
 }
 
 td, th {

@@ -45,7 +45,7 @@
 
 			// conditional statements as a layout manager for a proper search textBox output
 				if (pullSumOfEarnings === true) {
-		$.get("/salesSummary/EarningsPerCategory/search/" + pullSumOfEarnings, function(results){
+		$.get("/salesSummary/earningsPerCategory/search/" + pullSumOfEarnings, function(results){
 					$("#reqEarningsCategoryNameTd").html(results);
 		  });
 
@@ -57,14 +57,14 @@
 
 	$('#pullCategoryName').keyup(function(){
 		var pullCategoryName = $('#pullCategoryName').val();
-		$.get('/salesSummary/EarningsPerCategory/search/' + pullCategoryName, function(results){
+		$.get('/salesSummary/earningsPerCategory/search/' + pullCategoryName, function(results){
 				$('#reqEarningsCategoryNameTd').html(results);
 
 		  });
 
 		// conditional statements as a layout manager for a proper search textBox output
 				if (pullCategoryName === true) {
-		$.get("/salesSummary/EarningsPerCategory/search/" + pullCategoryName, function(results){
+		$.get("/salesSummary/earningsPerCategory/search/" + pullCategoryName, function(results){
 					$("#reqEarningsCategoryNameTd").html(results);
 		  });
 
@@ -81,7 +81,7 @@
 
 		});
 				if (pullProductProfit === true) {
-				$.get("/salesSummary/EarningsPerCategory/search/" + pullProductProfit, function(results){
+				$.get("/salesSummary/earningsPerCategory/search/" + pullProductProfit, function(results){
 							$("#reqEarningsCategoryNameTd").html(results);
 				  });
 
