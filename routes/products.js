@@ -116,13 +116,13 @@ exports.showEdit = function (req, res, next) {
 							selected : category.id === product.Category_id
 						}
 					});
-
+					
 					res.render('editProduct', { 
 						page_title:"Edit Customers - Node.js",
 						products : product,
 					 	categories:categories
 					});      
-				});
+			});
       	});
 	});
 };

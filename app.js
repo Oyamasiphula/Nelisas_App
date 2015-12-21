@@ -16,8 +16,8 @@ var app = express();
 
 var dbOptions = {
       host: 'localhost',
-      user: 'root',
-      password: 'codex',
+      user: 'nelisa',
+      password: 'password',
       port: 3306,
       database: 'Nels_db'
 };
@@ -35,6 +35,7 @@ app.set('view engine', 'handlebars');
 
 
 app.use(express.static(__dirname + '/public'));
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 
 app.use(myConnection(mysql, dbOptions, 'single'));
