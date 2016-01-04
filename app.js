@@ -58,10 +58,7 @@ app.post('/products/add/', products.add);
 app.get('/products/delete/:id', products.delete);
 
 	// productsCategories routes
-app.get('/addProductsCategories' , function(req, res){
-	//Create routes
-	res.render('addProductsCategories');	
-});
+app.get('/addProductsCategories' , productsCategories.showAdd);
 app.get('/productsCategories', productsCategories.show);
 app.get('/productsCategories/search/:query',productsCategories.searchCategories)
 app.get('/productsCategories/edit/:id', productsCategories.get);
@@ -86,7 +83,7 @@ app.get('/salesSummary/earningsPerCategory', sales.earningsPerCategory);
 	// 3nd Sales route(s) for salesProfits
 app.get('/salesProfits' ,salesProfits.show);
 app.get('/salesProfits/search/:query' ,salesProfits.searchProfitsPerProduct);
-
+app.get('/about', products.about);
 
 
 /*we call "getProductCategories()" therefore "findCatNames = productCategories.findProductCategories();"is being excetuted -
