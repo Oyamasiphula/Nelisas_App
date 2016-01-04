@@ -54,6 +54,10 @@ exports.show = function (req, res, next) {
      });
 };
 
+exports.showAdd = function(req, res, next){
+    res.render('addProductsCategories');
+};
+
 exports.add = function (req, res, next) {
     req.getConnection(function(err, connection){
         
