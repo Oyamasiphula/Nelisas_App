@@ -2,9 +2,7 @@
 
 {{#products}}
 <form action="/products/edit/{{id}}" method="POST">
-	
 	Description: <input type="text" name="Product_name" value="{{Product_name}}" >
-	<p>Current Category : {{Category_id}}</p>
 	{{/products}}
 	<select name="Category_id">
             {{#categories}}
@@ -24,5 +22,4 @@
 .main-menu {
 	display: none;
 }
-
 </style>
