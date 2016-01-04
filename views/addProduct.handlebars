@@ -1,6 +1,7 @@
 <h1>Products</h1>
 
-
+<div class="row">
+  <br>
 {{#products}}
   <h2>{{Product_name}}</h2>
   <a href="/products/edit/{{id}}">Edit</a>
@@ -12,20 +13,24 @@
 {{/empty}}
 
 
-<div id="add-products">
-	
-	<h1>Add a product</h1>
-	<form action="/products/add/" method="POST">
-		Description: <input name="Product_name" type="text">
-    <!-- [[dropdown]] -->
-          <select name="Category_id">
-            {{#categories}}
-            <option value = "{{id}}">{{Category_name}}</option>
-            {{/categories}}
-          </select>	
-      <!-- [[/dropdown]] -->
-		<input type="submit">
-	</form>
+      <div id="add-products">
+      	
+      	<h1>Add a product</h1>
+      	<form action="/products/add/" method="POST">
+      		Description: <input name="Product_name" type="text">
+          <!-- [[dropdown]] -->
+                <select name="Category_id">
+                  {{#categories}}
+                  <option value = "{{id}}">{{Category_name}}</option>
+                  {{/categories}}
+                </select>	
+            <!-- [[/dropdown]] -->
+      		<input type="submit">
+      	</form>
+        <br>
+        <br>
+        <br>
+      </div>
 </div>
 
 <style type="text/css">
