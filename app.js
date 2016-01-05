@@ -100,7 +100,7 @@ app.get('/message' , function(req, res){
  dont type "end" use text inside "quotes" then our function route  - "function res.render('productsCategories')" will work as an exception.
  for that matter "findProductCategories" function's results/output inside routes is being parsed as"findCatNames" will be rendered */
 
-var port = process.env.port || 2001;
+var port = process.env.port || 2002;
 
 app.listen(port, function(){
 	console.log('listening on *:' + port);
