@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10deb1
+-- version 4.4.13.1deb1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 11, 2015 at 10:46 AM
--- Server version: 5.5.46-0ubuntu0.14.04.2
--- PHP Version: 5.5.9-1ubuntu4.14
+-- Generation Time: Jan 05, 2016 at 02:05 AM
+-- Server version: 5.6.27-0ubuntu1
+-- PHP Version: 5.6.11-1ubuntu3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `Nels_db`
@@ -27,10 +27,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `Categories_td` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Category_name` char(150) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+  `id` int(11) NOT NULL,
+  `Category_name` char(150) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Categories_td`
@@ -55,12 +54,10 @@ INSERT INTO `Categories_td` (`id`, `Category_name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `Products_td` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `Product_name` char(30) DEFAULT NULL,
-  `Category_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `Category_id` (`Category_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=133 ;
+  `Category_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Products_td`
@@ -99,16 +96,13 @@ INSERT INTO `Products_td` (`id`, `Product_name`, `Category_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `Purchases_td` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `Purchases_date` date DEFAULT NULL,
   `Product_id` int(11) DEFAULT NULL,
   `qTy` int(11) DEFAULT NULL,
   `Supplier_id` int(11) DEFAULT NULL,
-  `product_price` char(15) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `Product_id` (`Product_id`),
-  KEY `Supplier_id` (`Supplier_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=154 ;
+  `product_price` char(15) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Purchases_td`
@@ -744,14 +738,12 @@ INSERT INTO `sales_csv` (`day`, `date`, `stock_item`, `no_sold`, `sales_price`) 
 --
 
 CREATE TABLE IF NOT EXISTS `Sales_td` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `Sales_date` date DEFAULT NULL,
   `Product_id` int(11) DEFAULT NULL,
   `qTy` int(11) DEFAULT NULL,
-  `product_price` char(15) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `Product_id` (`Product_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=455 ;
+  `product_price` char(15) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=455 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Sales_td`
@@ -1394,10 +1386,9 @@ INSERT INTO `stock_purchases_csv` (`shop`, `date`, `item`, `quantity`, `cost`, `
 --
 
 CREATE TABLE IF NOT EXISTS `Suppliers_td` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Supplier_name` char(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  `id` int(11) NOT NULL,
+  `Supplier_name` char(50) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Suppliers_td`
@@ -1411,6 +1402,73 @@ INSERT INTO `Suppliers_td` (`id`, `Supplier_name`) VALUES
 (5, 'ChinaTown');
 
 --
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `Categories_td`
+--
+ALTER TABLE `Categories_td`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Products_td`
+--
+ALTER TABLE `Products_td`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `Category_id` (`Category_id`);
+
+--
+-- Indexes for table `Purchases_td`
+--
+ALTER TABLE `Purchases_td`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `Product_id` (`Product_id`),
+  ADD KEY `Supplier_id` (`Supplier_id`);
+
+--
+-- Indexes for table `Sales_td`
+--
+ALTER TABLE `Sales_td`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `Product_id` (`Product_id`);
+
+--
+-- Indexes for table `Suppliers_td`
+--
+ALTER TABLE `Suppliers_td`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Categories_td`
+--
+ALTER TABLE `Categories_td`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `Products_td`
+--
+ALTER TABLE `Products_td`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=133;
+--
+-- AUTO_INCREMENT for table `Purchases_td`
+--
+ALTER TABLE `Purchases_td`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=154;
+--
+-- AUTO_INCREMENT for table `Sales_td`
+--
+ALTER TABLE `Sales_td`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=455;
+--
+-- AUTO_INCREMENT for table `Suppliers_td`
+--
+ALTER TABLE `Suppliers_td`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
 -- Constraints for dumped tables
 --
 
@@ -1419,9 +1477,9 @@ INSERT INTO `Suppliers_td` (`id`, `Supplier_name`) VALUES
 --
 ALTER TABLE `Products_td`
   ADD CONSTRAINT `Category_id` FOREIGN KEY (`Category_id`) REFERENCES `Categories_td` (`id`),
-  ADD CONSTRAINT `fk_Category_id` FOREIGN KEY (`Category_id`) REFERENCES `Categories_td` (`id`),
   ADD CONSTRAINT `Products_td_ibfk_1` FOREIGN KEY (`Category_id`) REFERENCES `Categories_td` (`id`),
-  ADD CONSTRAINT `Products_td_ibfk_2` FOREIGN KEY (`Category_id`) REFERENCES `Categories_td` (`id`);
+  ADD CONSTRAINT `Products_td_ibfk_2` FOREIGN KEY (`Category_id`) REFERENCES `Categories_td` (`id`),
+  ADD CONSTRAINT `fk_Category_id` FOREIGN KEY (`Category_id`) REFERENCES `Categories_td` (`id`);
 
 --
 -- Constraints for table `Purchases_td`
