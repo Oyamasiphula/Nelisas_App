@@ -1,11 +1,14 @@
-'use strict';
+// 'use strict';
 
  var express = require('express'),
  	exphbs = require('express-handlebars'),
  	mysql = require('mysql'),
  	myConnection = require('express-myconnection'),
  	bodyParser = require('body-parser'),
- 	session = require('express-session'),	 
+  cookieParser = require('cookie-parser'),
+ 	session = require('express-session'),
+  passport = require('passport'),
+  passportLocal = require('passport-local'),
  	products = require('./routes/products'),
  	productsCategories = require('./routes/categories'),
  	sales = require('./routes/sales'),
@@ -22,32 +25,76 @@ var dbOptions = {
       database: 'Nels_db'
 };
 
+
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+// static files which would be then referenced by its root (/folder/directory/) public_folder will be ignored for file refencing
+app.use(express.static(__dirname + '/public'));
+// static files which would be then referenced by its root (/folder/directory/) and on this following block /bower_components directory will be ignored for file refencing
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+
 //setup middleware
 app.use(myConnection(mysql, dbOptions, 'single'));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
-app.use(session({secret: "Haha haha", saveUninitialized : false, resave: true, cookie : {maxAge : 5*60000}}));
+// app.use(session({secret: "Haha haha", saveUninitialized : false, resave: true, cookie : {maxAge : 5*60000}}));
 // app.set("x-powered-by", false);
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
-
-
-app.use(express.static(__dirname + '/public'));
-app.use('/bower_components',  express.static(__dirname + '/bower_components'));
-
-
 app.use(myConnection(mysql, dbOptions, 'single'));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cookieParser());
+app.use(session({
+  secret:process.env.SESSION_SECRET || 'secret',
+  resave:false,
+  saveUninitialized:false
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+
+passport.use(new passportLocal.Strategy(function(username,password,done){
+  if (username === password) {
+    done(null, {id:username,
+             name :username
+       // password:password
+    });
+  } else{
+      alert("Please sign up or create an an account as a new spaza shop owner!")
+      redirect("/sign_up");
+// note this will be the result of the failing validation and this is how we tell passport that the validation has failed
+  done(null,null);
+  }
+}));
+
+passport.serializeUser(function (user, done){
+  done(null,user.id);
+});
+
+passport.deserializeUser(function(id,done){
+  done(null, {id:id,
+           name:id
+  });
+});
+
+app.get("/SignORlogin",function(req,res,next){
+      res.render("login");
+})
+app.post("/SignORlogin",passport.authenticate("local"),function(req,res){
+  res.redirect('/');
+})
 
 app.get('/', function(req, res){
-	res.render('home')
-}); 
+	res.render('home',{
+    isAuthenticated: req.isAuthenticated(),
+             user :req.user
+  });
 
+});
 // products routes
 app.get('/products/', products.show);
 app.get('/products/search/:query',products.search);
@@ -88,12 +135,12 @@ app.get('/about', products.about);
 
 /*we call "getProductCategories()" therefore "findCatNames = productCategories.findProductCategories();"is being excetuted -
 by having original function's method for that instance new variable is must be created so that we prevent to get error of undefined values*/
-// 	 
+//
 
 app.get('/message' , function(req, res){
 	//Create routes
 	res.send('I got it !!!');
-	
+
 });
 
 /*'/productCategories'is being used as our HTTP host name when you type eg this url name - url("http://localhost:2000/productCategories").end
