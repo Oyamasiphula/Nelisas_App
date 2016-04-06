@@ -72,5 +72,7 @@
 					window.location.replace("http://localhost:2001/salesProfits");
 				  };
 	});
-$(function(){setTimeout(function(){$('.content').addClass('fadeIn');},300);});
+	$(function(){setTimeout(function(){
+		$('.content').addClass('fadeIn');},300);
+	});
 });	
