@@ -1,10 +1,10 @@
 /***
  * A very basic CRUD example using MySQL
- */	
+ */
 //todo - fix the error handling
 exports.search = function(req, res, next){
 	req.getConnection(function(error, connection){
-        
+
     var productPullReq = req.params.query;
     	productPullReq = "%" + productPullReq + "%";
 
@@ -23,8 +23,8 @@ exports.search = function(req, res, next){
 					});
 				});
 			});
-		});	
-	}; 
+		});
+	};
 
 exports.show = function (req, res, next) {
 	var id = req.params.id;
@@ -38,16 +38,16 @@ exports.show = function (req, res, next) {
 	var categoriesDataPullReq = 'SELECT id, Category_name from Categories_td';
 
 				connection.query(findMostPopularProductQuery, [], function(err, mostPopularProduct){
-				if (err) 
+				if (err)
 						return next("Error Selecting : %s ", err);
 				connection.query(findleastPopularProductQuery, [], function(err, leastPopularProduct){
-				if (err) 
+				if (err)
 						return next("Error Selecting : %s ", err);
 				connection.query('SELECT Products_td.id, Product_name, Category_name FROM Products_td INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id', [], function(err, results) {
-	        	if (err) 
+	        	if (err)
 	        			return next("Error Selecting : %s ", err);
 				connection.query('SELECT Products_td.id, Product_name, Category_name FROM Products_td INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id', [], function(err, results) {
-	        	if (err) 
+	        	if (err)
 	        			return next("Error Selecting : %s ", err);
 
 
@@ -65,7 +65,7 @@ exports.show = function (req, res, next) {
 
 exports.add = function (req, res, next) {
 	req.getConnection(function(err, connection){
-	
+
 		var input = JSON.parse(JSON.stringify(req.body));
 		var data = {
             Product_name : input.Product_name,
@@ -96,19 +96,15 @@ exports.showAdd = function (req, res, next) {
 
 exports.showEdit = function (req, res, next) {
 	req.getConnection(function(err, connection){
-		
+
 		var id = req.params.id;
     	connection.query('SELECT id, Category_name from Categories_td', [], function(err, categoryList) {
         	if (err)
               		return next("Error Selecting : %s ",err );
-         
          		connection.query('SELECT * FROM Products_td WHERE id = ?', [id], function(err,rows){
 			if(err)
 					return next("Error Selecting : %s ", err);
-
-
 					var product = rows[0];
-
 					var categories = categoryList.map(function(category){
 						return {
 							id : category.id,
@@ -116,12 +112,11 @@ exports.showEdit = function (req, res, next) {
 							selected : category.id === product.Category_id
 						}
 					});
-					
-					res.render('editProduct', { 
+					res.render('editProduct', {
 						page_title:"Edit Customers - Node.js",
 						products : product,
 					 	categories:categories
-					});      
+					});
 			});
       	});
 	});
@@ -136,7 +131,7 @@ exports.update = function(req, res, next){
     	connection.query('UPDATE Products_td SET Product_name = ?, Category_id = ? WHERE id = ?', [data.Product_name, data.Category_id, id], function(err, rows, fields){
     		if (err)
               		return next("Error Updating : %s ",err);
-  
+
           	res.redirect('/products');
     	});
     });
@@ -149,20 +144,20 @@ exports.delete = function(req, res, next){
 		connection.query('DELETE FROM Products_td WHERE id = ?', id, function(err,rows){
 			if(err)
 				return next("Error deleting : %s ",err );
-			
+
 			res.redirect('/products');
 		});
-		 
+
 	});
 };
 
 exports.showPopularProduct = function(req, res, next){
 	req.getConnection(function(err, connection){
-		
+
 		connection.query('SELECT SUM(qTy) AS Quantity, Product_id ,Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id GROUP BY Product_name ORDER BY SUM(qTy) DESC LIMIT 0,1', [], function(err, results){
-		if (err) 
+		if (err)
 				return next(err);
-    	
+
     		res.render( 'products', {
     			mostPopularProduct : results
 
