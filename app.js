@@ -62,13 +62,13 @@ passport.use(new passportLocal.Strategy(function(username,password,done){
     done(null, {id:username,
              name :username
        // password:password
-    });
+                });
   } else{
       alert("Please sign up or create an an account as a new spaza shop owner!")
       redirect("/sign_up");
 // note this will be the result of the failing validation and this is how we tell passport that the validation has failed
-  done(null,null);
-  }
+        done(null,null);
+    }
 }));
 
 passport.serializeUser(function (user, done){
@@ -112,7 +112,6 @@ app.get('/productsCategories/edit/:id', productsCategories.get);
 app.post('/productsCategories/update/:id', productsCategories.update);
 app.post('/productsCategories/add/', productsCategories.add);
 app.get('/productsCategories/delete/:id', productsCategories.delete);
-
 	// Sales routes
 app.get('/sales', sales.showSales);
 app.get('/sales/search/:query', sales.searchSales);
@@ -120,23 +119,19 @@ app.get('/sales/showAddSales/', sales.showAddSales)
 app.post('/sales/add', sales.add);
 app.get('/sales/edit/:id', sales.editSales);
 app.post('/sales/edit/:id/', sales.update);
-
 	// 2nd Sales route(s) for salesSummary
 app.get('/salesSummary/showCategories', sales.showCategories);
 app.get('/salesSummary/earningsPerCategory/search/:query', sales.searchEarningsPerCategory);
 app.get('/salesSummary/showCategories/search/:query', sales.searchSalesSum);
 app.get('/salesSummary/earningsPerCategory', sales.earningsPerCategory);
-
 	// 3nd Sales route(s) for salesProfits
 app.get('/salesProfits' ,salesProfits.show);
 app.get('/salesProfits/search/:query' ,salesProfits.searchProfitsPerProduct);
 app.get('/about', products.about);
 
-
 /*we call "getProductCategories()" therefore "findCatNames = productCategories.findProductCategories();"is being excetuted -
 by having original function's method for that instance new variable is must be created so that we prevent to get error of undefined values*/
 //
-
 app.get('/message' , function(req, res){
 	//Create routes
 	res.send('I got it !!!');
@@ -146,8 +141,6 @@ app.get('/message' , function(req, res){
 /*'/productCategories'is being used as our HTTP host name when you type eg this url name - url("http://localhost:2000/productCategories").end
  dont type "end" use text inside "quotes" then our function route  - "function res.render('productsCategories')" will work as an exception.
  for that matter "findProductCategories" function's results/output inside routes is being parsed as"findCatNames" will be rendered */
-
-var port = process.env.port || 2002;
 
 app.listen(port, function(){
 	console.log('listening on *:' + port);
