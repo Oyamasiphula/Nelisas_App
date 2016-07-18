@@ -1,4 +1,3 @@
-{{#if isAuthenticated}}
 <header>
         <div class="container">
             <div class="row">
@@ -7,18 +6,13 @@
                     <div class="intro-text">
                         <!-- <span class="name">Start Bootstrap</span> -->
                         <hr class="star-light">
-                        <h3>Hello, {{user.name}}!</h3>
                         <br>
-
                         <span class="skills">Welcome to our Nelisa's spaza admin portal!</span>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-{{else}}
-<a href="/login">Login here</a>
-{{/if}}
 <style type="text/css">
 .main-menu {
     display: none;
