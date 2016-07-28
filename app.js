@@ -39,8 +39,12 @@ app.use(bodyParser.json())
 
 // products routes
 app.get('/',function(req , res){
-  res.render('home')
+  res.render('signUp_or_logIn')
 })
+
+// app.get('/',function(req , res){
+//   res.render('home')
+// })
 
 app.get('/products/', products.show);
 app.get('/products/search/:query',products.search);
