@@ -1,0 +1,35 @@
+{
+  /**
+   * Application configuration section
+   * http://pm2.keymetrics.io/docs/usage/application-declaration/
+   */
+  apps : [
+
+// First application
+    {
+      name      : "Nelisas_App",
+      script    : "app.js",
+      env: {
+        COMMON_VARIABLE: "true"
+      },
+      env_production : {
+        NODE_ENV: "production"
+      }
+    }
+  ],
+
+  /**
+   * Deployment section
+   * http://pm2.keymetrics.io/docs/usage/deployment/
+   */
+  deploy : {
+    production : {
+      user : "oya",
+      host : "process.env.NELISAS_REMOTE",
+      ref  : "origin/master",
+      repo : "git@github.com:Oyamasiphula/Nelisas_App.git",
+      path : "/home/oya/projects/nelisa_prod",
+      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production"
+    }
+  }
+}
