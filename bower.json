@@ -18,7 +18,15 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2.1.4",
-    "typeahead.js": "~0.11.1"
+      "jquery": "~2.1.4",
+      "typeahead.js": "~0.11.1",
+      "angular": "latest",
+      "angular-resource": "latest",
+      "angular-cookies": "latest",
+      "angular-mocks": "latest",
+      "angular-route": "latest",
+      "bootstrap": "latest",
+      "angular-bootstrap": "0.10.0",
+      "angular-ui-router": "#master"
   }
 }
