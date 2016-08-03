@@ -5,14 +5,14 @@
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.13.3",
+    "bower": "~1.7.2",
     "express": "~4.13.3",
     "express-handlebars": "~2.0.1",
     "express-myconnection": "^1.0.4",
     "express-session": "^1.11.3",
     "mocha": "^2.3.3",
     "mysql": "^2.9.0",
-    "nodemon": "~1.4.0",
-    "bower": "~1.7.2"
+    "nodemon": "~1.4.0"
   },
   "devDependencies": {},
   "scripts": {
