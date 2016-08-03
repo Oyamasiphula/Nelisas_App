@@ -39,13 +39,17 @@ app.use(bodyParser.json())
 
 // products routes
 app.get('/',function(req , res){
-  res.render('signUp_or_logIn')
+  res.render('home')
+})
+app.get('/sign_up',function(req, res){
+  res.render('sign_up')
 })
 
-// app.get('/',function(req , res){
-//   res.render('home')
-// })
+app.get('/sign_in',function(req, res){
+  res.render('sign_In')
+})
 
+  // products routes
 app.get('/products/', products.show);
 app.get('/products/search/:query',products.search);
 app.get('/products/edit/:id', products.showEdit);
@@ -74,7 +78,7 @@ app.get('/salesSummary/showCategories', sales.showCategories);
 app.get('/salesSummary/earningsPerCategory/search/:query', sales.searchEarningsPerCategory);
 app.get('/salesSummary/showCategories/search/:query', sales.searchSalesSum);
 app.get('/salesSummary/earningsPerCategory', sales.earningsPerCategory);
-	// 3nd Sales route(s) for salesProfits
+	// 3rd Sales route(s) for salesProfits
 app.get('/salesProfits' ,salesProfits.show);
 app.get('/salesProfits/search/:query' ,salesProfits.searchProfitsPerProduct);
 app.get('/about', products.about);
