@@ -122,7 +122,8 @@ color: #ffffff;
 }
 
 input, textarea {
-font-size: 22px;
+font-family: "serif","Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 14px;
 display: block;
 width: 100%;
 /*height: 100%;*/
