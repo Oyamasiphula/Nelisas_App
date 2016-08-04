@@ -25,7 +25,7 @@
   deploy : {
     production : {
       user : "oya",
-      host : "159.203.92.33",
+      host : process.env.NELISAS_CP
       ref  : "origin/master",
       repo : "git@github.com:Oyamasiphula/Nelisas_App.git",
       path : "/home/oya/projects/nelisa_prod",
