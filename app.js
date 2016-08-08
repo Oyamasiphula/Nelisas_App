@@ -6,6 +6,7 @@
  	myConnection = require('express-myconnection'),
   bodyParser = require('body-parser'),
   session = require('express-session'),
+  userAuth = require('./routes/userAuth'),
  	products = require('./routes/products'),
  	productsCategories = require('./routes/categories'),
  	sales = require('./routes/sales'),
@@ -36,6 +37,13 @@ app.use(myConnection(mysql, dbOptions, 'single'));
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
+
+
+// users routes
+app.get('/users', userAuth.checkUser, function(req, res){
+  var userData = userService.getUserData();
+  res.render('users', userData)
+});
 
 // products routes
 app.get('/',function(req , res){
