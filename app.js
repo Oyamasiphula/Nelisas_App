@@ -38,6 +38,191 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
+// app.get('/', function(req, res) {
+//   res.render('index.ejs'); // load the index.ejs file
+// });
+
+// =====================================
+// LOGIN ===============================
+// =====================================
+// show the login form
+app.get('/sign_in', userAuth.sign_In)
+// process the login form
+app.post('/sign_in', passport.authenticate('local-login', {
+          successRedirect : '/profile', // redirect to the secure profile section
+          failureRedirect : '/sign_in', // redirect back to the signup page if there is an error
+          failureFlash : true // allow flash messages
+  }),
+      function(req, res) {
+          console.log("hello");
+
+          if (req.body.remember) {
+            req.session.cookie.maxAge = 1000 * 60 * 3;
+          } else {
+            req.session.cookie.expires = false;
+          }
+      res.redirect('/');
+  });
+
+
+// =====================================
+// SIGNUP ==============================
+// =====================================
+// show the signup form
+app.get('/sign_up', userAuth.sign_up)
+// process the signup form
+app.post('/signup', passport.authenticate('local-signup', {
+  successRedirect : '/profile', // redirect to the secure profile section
+  failureRedirect : '/signup', // redirect back to the signup page if there is an error
+  failureFlash : true // allow flash messages
+}));
+
+
+
+
+
+// =====================================
+// PROFILE SECTION =========================
+// =====================================
+// we will want this protected so you have to be logged in to visit
+// we will use route middleware to verify this (the isLoggedIn function)
+app.get('/profile', isLoggedIn, function(req, res) {
+  res.render('profile.ejs', {
+    user : req.user // get the user out of session and pass to template
+  });
+});
+
+// =====================================
+// LOGOUT ==============================
+// =====================================
+app.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // users routes
 app.get('/users', userAuth.checkUser, function(req, res){
@@ -46,16 +231,9 @@ app.get('/users', userAuth.checkUser, function(req, res){
 });
 
 // products routes
-app.get('/',function(req , res){
-  res.render('home')
-})
-app.get('/sign_up',function(req, res){
-  res.render('sign_up')
-})
-
-app.get('/sign_in',function(req, res){
-  res.render('sign_In')
-})
+// app.get('/',function(req, res){
+//   res.render('home')
+// });
 
   // products routes
 app.get('/products/', products.show);
