@@ -108,7 +108,6 @@ app.get('/home', userAuth.checkIfAuthorized, function(req, res){
   res.render('home', { user: req.user });
 });
 
-
   // products routes
 app.get('/products', userAuth.checkIfAuthorized, products.show);
 app.get('/products/search/:query', userAuth.checkIfAuthorized, products.search);
@@ -118,7 +117,11 @@ app.get('/products/add/', userAuth.checkIfAuthorized, products.showAdd);
 app.post('/products/add/', userAuth.checkIfAuthorized, products.add);
 app.get('/products/delete/:id', userAuth.checkIfAuthorized, products.delete);
 
-	// productsCategories routes
+// productsCategories routes
+
+/*'/productCategories'is being used as our HTTP host name when you type eg this url name - url("http://localhost:2000/productCategories").end
+ dont type "end" use text inside "quotes" then our function route  - "function res.render('productsCategories')" will work as an exception.
+ for that matter "findProductCategories" function's results/output inside routes is being parsed as"findCatNames" will be rendered */
 app.get('/addProductsCategories' , userAuth.checkIfAuthorized, productsCategories.showAdd);
 app.get('/productsCategories', userAuth.checkIfAuthorized, productsCategories.show);
 app.get('/productsCategories/search/:query',productsCategories.searchCategories)
@@ -146,10 +149,6 @@ app.get('/salesProfits', userAuth.checkIfAuthorized, salesProfits.show);
 app.get('/salesProfits/search/:query', userAuth.checkIfAuthorized, salesProfits.searchProfitsPerProduct);
 app.get('/about', userAuth.checkIfAuthorized, products.about);
 
-
-/*'/productCategories'is being used as our HTTP host name when you type eg this url name - url("http://localhost:2000/productCategories").end
- dont type "end" use text inside "quotes" then our function route  - "function res.render('productsCategories')" will work as an exception.
- for that matter "findProductCategories" function's results/output inside routes is being parsed as"findCatNames" will be rendered */
  // =====================================
  // LOGOUT ==============================
  // =====================================
