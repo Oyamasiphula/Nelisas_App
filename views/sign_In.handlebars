@@ -8,7 +8,9 @@
 
         <div id="login">
           <h1>Welcome Back!</h1>
-
+          {{#if message}}
+              <div class="alert alert-danger">{{message}}</div>
+          {{/if}}
         <form action="/sign_in" method="post">
             <div class="field-wrap">
               <label>
