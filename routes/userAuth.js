@@ -15,7 +15,7 @@ exports.verifyUser = function(req, res) {
 };
 
 // route middleware to make sure
-exports.isLoggedIn = function(req, res, next) {
+exports.checkIfAuthorized = function(req, res, next) {
 	// if user is authenticated in the session, carry on
 	if (req.isAuthenticated())
 		return next();
