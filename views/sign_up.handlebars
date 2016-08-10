@@ -8,7 +8,9 @@
       <div class="tab-content">
         <div id="sign_up">
           <h1>Sign Up for Free</h1>
-
+          {{#if message}}
+              <div class="alert alert-danger">{{message}}</div>
+          {{/if}}
           <form action="/sign_up" method="post">
 
           <div class="top-row">
