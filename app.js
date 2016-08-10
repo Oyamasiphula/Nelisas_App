@@ -103,47 +103,57 @@ app.post('/sign_up', passport.authenticate('local-signup', {
 // PROFILE SECTION =========================
 // =====================================
 // we will want this protected so you have to be logged in to visit
-// we will use route middleware to verify this (the isLoggedIn function)
-app.get('/profile', userAuth.isLoggedIn, userAuth.verifyUser)
+// we will use route middleware to verify this (the checkIfAuthorized function)
+app.get('/profile', userAuth.checkIfAuthorized, userAuth.verifyUser)
+
+// var isAuthenticated = function (req, res, next) {
+//   if (req.isAuthenticated())
+//     return next();
+//   res.redirect('/');
+// }
 
 // products routes
-app.get('/home',function(req, res){
-  res.render('home')
+app.get('/home', userAuth.checkIfAuthorized, function(req, res){
+  res.render('home', { user: req.user });
 });
 
+
   // products routes
-app.get('/products', products.show);
-app.get('/products/search/:query',products.search);
-app.get('/products/edit/:id', products.showEdit);
-app.post('/products/edit/:id', products.update);
-app.get('/products/add/', products.showAdd);
-app.post('/products/add/', products.add);
-app.get('/products/delete/:id', products.delete);
+app.get('/products', userAuth.checkIfAuthorized, products.show);
+app.get('/products/search/:query', userAuth.checkIfAuthorized, products.search);
+app.get('/products/edit/:id', userAuth.checkIfAuthorized, products.showEdit);
+app.post('/products/edit/:id', userAuth.checkIfAuthorized, products.update);
+app.get('/products/add/', userAuth.checkIfAuthorized, products.showAdd);
+app.post('/products/add/', userAuth.checkIfAuthorized, products.add);
+app.get('/products/delete/:id', userAuth.checkIfAuthorized, products.delete);
 
 	// productsCategories routes
-app.get('/addProductsCategories' , productsCategories.showAdd);
-app.get('/productsCategories', productsCategories.show);
+app.get('/addProductsCategories' , userAuth.checkIfAuthorized, productsCategories.showAdd);
+app.get('/productsCategories', userAuth.checkIfAuthorized, productsCategories.show);
 app.get('/productsCategories/search/:query',productsCategories.searchCategories)
-app.get('/productsCategories/edit/:id', productsCategories.get);
-app.post('/productsCategories/update/:id', productsCategories.update);
-app.post('/productsCategories/add/', productsCategories.add);
-app.get('/productsCategories/delete/:id', productsCategories.delete);
+app.get('/productsCategories/edit/:id', userAuth.checkIfAuthorized, productsCategories.get);
+app.post('/productsCategories/update/:id', userAuth.checkIfAuthorized, productsCategories.update);
+app.post('/productsCategories/add/', userAuth.checkIfAuthorized, productsCategories.add);
+app.get('/productsCategories/delete/:id', userAuth.checkIfAuthorized, productsCategories.delete);
+
 	// Sales routes
-app.get('/sales', sales.showSales);
-app.get('/sales/search/:query', sales.searchSales);
-app.get('/sales/showAddSales/', sales.showAddSales)
-app.post('/sales/add', sales.add);
-app.get('/sales/edit/:id', sales.editSales);
-app.post('/sales/edit/:id/', sales.update);
+app.get('/sales', userAuth.checkIfAuthorized, sales.showSales);
+app.get('/sales/search/:query', userAuth.checkIfAuthorized, sales.searchSales);
+app.get('/sales/showAddSales/', userAuth.checkIfAuthorized, sales.showAddSales)
+app.post('/sales/add', userAuth.checkIfAuthorized, sales.add);
+app.get('/sales/edit/:id', userAuth.checkIfAuthorized, sales.editSales);
+app.post('/sales/edit/:id/', userAuth.checkIfAuthorized, sales.update);
+
 	// 2nd Sales route(s) for salesSummary
-app.get('/salesSummary/showCategories', sales.showCategories);
-app.get('/salesSummary/earningsPerCategory/search/:query', sales.searchEarningsPerCategory);
-app.get('/salesSummary/showCategories/search/:query', sales.searchSalesSum);
-app.get('/salesSummary/earningsPerCategory', sales.earningsPerCategory);
+app.get('/salesSummary/showCategories', userAuth.checkIfAuthorized, sales.showCategories);
+app.get('/salesSummary/earningsPerCategory/search/:query', userAuth.checkIfAuthorized, sales.searchEarningsPerCategory);
+app.get('/salesSummary/showCategories/search/:query', userAuth.checkIfAuthorized, sales.searchSalesSum);
+app.get('/salesSummary/earningsPerCategory', userAuth.checkIfAuthorized, sales.earningsPerCategory);
+
 	// 3rd Sales route(s) for salesProfits
-app.get('/salesProfits' ,salesProfits.show);
-app.get('/salesProfits/search/:query' ,salesProfits.searchProfitsPerProduct);
-app.get('/about', products.about);
+app.get('/salesProfits', userAuth.checkIfAuthorized, salesProfits.show);
+app.get('/salesProfits/search/:query', userAuth.checkIfAuthorized, salesProfits.searchProfitsPerProduct);
+app.get('/about', userAuth.checkIfAuthorized, products.about);
 
 
 /*'/productCategories'is being used as our HTTP host name when you type eg this url name - url("http://localhost:2000/productCategories").end
