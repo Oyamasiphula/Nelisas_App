@@ -11,8 +11,6 @@ connection.query('USE ' + dbconfig.database);
 connection.query('\
 CREATE TABLE `' + dbconfig.database + '`.`' + dbconfig.users_table + '` ( \
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT, \
-    `first_name` VARCHAR(20) NOT NULL, \
-    `last_name` VARCHAR(20) NOT NULL, \
     `username` VARCHAR(20) NOT NULL, \
     `password` CHAR(60) NOT NULL, \
         PRIMARY KEY (`id`), \
