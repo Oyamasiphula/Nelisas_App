@@ -59,9 +59,6 @@ app.use(passport.session()); // persistent login sessions
 
 require('./Data_Storage/config/passport')(passport);
 
-app.get('/', function(req, res) {
-  res.render('sign_In'); // load the index.ejs file
-});
 
 // =====================================
 // LOGIN ===============================
@@ -90,7 +87,7 @@ app.post('/sign_in', passport.authenticate('local-login', {
 // SIGNUP ==============================
 // =====================================
 // show the signup form
-app.get('/sign_up', userAuth.sign_up)
+app.get('/', userAuth.sign_up)
 // process the signup form
 app.post('/sign_up', passport.authenticate('local-signup', {
   successRedirect : '/sign_in', // redirect to the secure profile section
@@ -105,12 +102,6 @@ app.post('/sign_up', passport.authenticate('local-signup', {
 // we will want this protected so you have to be logged in to visit
 // we will use route middleware to verify this (the checkIfAuthorized function)
 app.get('/profile', userAuth.checkIfAuthorized, userAuth.verifyUser)
-
-// var isAuthenticated = function (req, res, next) {
-//   if (req.isAuthenticated())
-//     return next();
-//   res.redirect('/');
-// }
 
 // products routes
 app.get('/home', userAuth.checkIfAuthorized, function(req, res){
