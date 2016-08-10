@@ -45,7 +45,7 @@ module.exports = function(passport) {
             passwordField : 'password',
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
-        function(req, first_name, last_name, username, password, done) {
+        function(req, username, password, done) {
             // find a user whose email is the same as the forms email
             // we are checking to see if the user trying to login already exists
             connection.query("SELECT * FROM users WHERE username = ?",[username], function(err, rows) {
@@ -62,11 +62,8 @@ module.exports = function(passport) {
                     };
 
                     var insertQuery = "INSERT INTO users ( username, password ) values (?,?)";
-                    if (err)
-                        return done(err);
+
                     connection.query(insertQuery,[newUserMysql.username, newUserMysql.password],function(err, rows) {
-                      if (err)
-                          return done(err);
                         newUserMysql.id = rows.insertId;
 
                         return done(null, newUserMysql);
@@ -95,7 +92,7 @@ module.exports = function(passport) {
                 if (err)
                     return done(err);
                 if (!rows.length) {
-                    return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+                    return done(null, false, req.flash('loginMessage', 'Incorrect username.')); // req.flash is the way to set flashdata using connect-flash
                 }
 
                 // if the user is found but the password is wrong
