@@ -70,7 +70,7 @@ app.get('/', function(req, res) {
 app.get('/sign_in', userAuth.sign_In)
 // process the login form
 app.post('/sign_in', passport.authenticate('local-login', {
-          successRedirect : '/profile', // redirect to the secure profile section
+          successRedirect : '/home', // redirect to the secure profile section
           failureRedirect : '/sign_in', // redirect back to the signup page if there is an error
           failureFlash : true // allow flash messages
   }),
@@ -93,7 +93,7 @@ app.post('/sign_in', passport.authenticate('local-login', {
 app.get('/sign_up', userAuth.sign_up)
 // process the signup form
 app.post('/sign_up', passport.authenticate('local-signup', {
-  successRedirect : '/home', // redirect to the secure profile section
+  successRedirect : '/sign_in', // redirect to the secure profile section
   failureRedirect : '/sign_up', // redirect back to the signup page if there is an error
   failureFlash : true // allow flash messages
 }));
@@ -106,23 +106,13 @@ app.post('/sign_up', passport.authenticate('local-signup', {
 // we will use route middleware to verify this (the isLoggedIn function)
 app.get('/profile', userAuth.isLoggedIn, userAuth.verifyUser)
 
-// =====================================
-// LOGOUT ==============================
-// =====================================
-app.get('/logout', userAuth.logout);
-// users routes
-// app.get('/users', userAuth.checkUser, function(req, res){
-//   var userData = userService.getUserData();
-//   res.render('users', userData)
-// });
-
 // products routes
-// app.get('/',function(req, res){
-//   res.render('home')
-// });
+app.get('/home',function(req, res){
+  res.render('home')
+});
 
   // products routes
-app.get('/products/', products.show);
+app.get('/products', products.show);
 app.get('/products/search/:query',products.search);
 app.get('/products/edit/:id', products.showEdit);
 app.post('/products/edit/:id', products.update);
@@ -155,9 +145,15 @@ app.get('/salesProfits' ,salesProfits.show);
 app.get('/salesProfits/search/:query' ,salesProfits.searchProfitsPerProduct);
 app.get('/about', products.about);
 
+
 /*'/productCategories'is being used as our HTTP host name when you type eg this url name - url("http://localhost:2000/productCategories").end
  dont type "end" use text inside "quotes" then our function route  - "function res.render('productsCategories')" will work as an exception.
  for that matter "findProductCategories" function's results/output inside routes is being parsed as"findCatNames" will be rendered */
+ // =====================================
+ // LOGOUT ==============================
+ // =====================================
+ app.get('/logout', userAuth.logout);
+
 
 var port = process.env.port || 2000
 
