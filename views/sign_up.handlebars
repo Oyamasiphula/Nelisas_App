@@ -6,25 +6,12 @@
       </ul>
 
       <div class="tab-content">
-        <div id="signup">
+        <div id="sign_up">
           <h1>Sign Up for Free</h1>
 
-          <form action="/" method="post">
+          <form action="/sign_up" method="post">
 
           <div class="top-row">
-            <div class="field-wrap">
-              <label>
-                First Name<span class="req">*</span>
-              </label>
-              <input type="text" placeholder="First Name" required autocomplete="off" />
-            </div>
-
-            <div class="field-wrap">
-              <label>
-                Last Name<span class="req">*</span>
-              </label>
-              <input type="text" placeholder="Last Name" required autocomplete="off"/>
-            </div>
             <div class="field-wrap">
               <label>
                 Choose username<span class="req">*</span>
@@ -32,19 +19,16 @@
               <input type="text" placeholder="username" name="username" required autocomplete="off"/>
             </div>
           </div>
-
-          <div class="field-wrap">
-            <label>
-              Set A Password<span class="req">*</span>
-            </label>
-            <input type="password" placeholder="password" name="password" required autocomplete="off"/>
-            <br>
+          <br>
+          <div class="top-row">
+            <div class="field-wrap">
             <label>
               Set A Password<span class="req">*</span>
             </label>
             <input type="password" placeholder="re-enter password" name="password" required autocomplete="off"/>
-
+            </div>
           </div>
+          <br>
 
           <button type="submit" class="button button-block"/>Get Started</button>
 
