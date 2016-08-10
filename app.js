@@ -5,13 +5,16 @@
  	mysql = require('mysql'),
  	myConnection = require('express-myconnection'),
   bodyParser = require('body-parser'),
+  cookieParser = require('cookie-parser'),
   session = require('express-session'),
+  morgan = require('morgan'),
+  passport = require('passport'),
+  flash = require('connect-flash'),
   userAuth = require('./routes/userAuth'),
  	products = require('./routes/products'),
  	productsCategories = require('./routes/categories'),
  	sales = require('./routes/sales'),
  	salesProfits = require('./routes/salesProfits');
-
 
 var app = express();
 
@@ -37,10 +40,28 @@ app.use(myConnection(mysql, dbOptions, 'single'));
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
+app.use(flash());
+// use connect-flash for flash messages stored in session
 
-// app.get('/', function(req, res) {
-//   res.render('index.ejs'); // load the index.ejs file
-// });
+// set up our express application
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+
+
+// required for passport
+app.use(session({
+	secret: 'vidyapathaisalwaysrunning',
+	resave: true,
+	saveUninitialized: true
+ } )); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+
+require('./Data_Storage/config/passport')(passport);
+
+app.get('/', function(req, res) {
+  res.render('sign_In'); // load the index.ejs file
+});
 
 // =====================================
 // LOGIN ===============================
@@ -71,14 +92,11 @@ app.post('/sign_in', passport.authenticate('local-login', {
 // show the signup form
 app.get('/sign_up', userAuth.sign_up)
 // process the signup form
-app.post('/signup', passport.authenticate('local-signup', {
-  successRedirect : '/profile', // redirect to the secure profile section
-  failureRedirect : '/signup', // redirect back to the signup page if there is an error
+app.post('/sign_up', passport.authenticate('local-signup', {
+  successRedirect : '/home', // redirect to the secure profile section
+  failureRedirect : '/sign_up', // redirect back to the signup page if there is an error
   failureFlash : true // allow flash messages
 }));
-
-
-
 
 
 // =====================================
@@ -86,149 +104,17 @@ app.post('/signup', passport.authenticate('local-signup', {
 // =====================================
 // we will want this protected so you have to be logged in to visit
 // we will use route middleware to verify this (the isLoggedIn function)
-app.get('/profile', isLoggedIn, function(req, res) {
-  res.render('profile.ejs', {
-    user : req.user // get the user out of session and pass to template
-  });
-});
+app.get('/profile', userAuth.isLoggedIn, userAuth.verifyUser)
 
 // =====================================
 // LOGOUT ==============================
 // =====================================
-app.get('/logout', function(req, res) {
-  req.logout();
-  res.redirect('/');
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.get('/logout', userAuth.logout);
 // users routes
-app.get('/users', userAuth.checkUser, function(req, res){
-  var userData = userService.getUserData();
-  res.render('users', userData)
-});
+// app.get('/users', userAuth.checkUser, function(req, res){
+//   var userData = userService.getUserData();
+//   res.render('users', userData)
+// });
 
 // products routes
 // app.get('/',function(req, res){
