@@ -14,7 +14,8 @@
  	products = require('./routes/products'),
  	productsCategories = require('./routes/categories'),
  	sales = require('./routes/sales'),
- 	salesProfits = require('./routes/salesProfits');
+ 	salesProfits = require('./routes/salesProfits'),
+  suppliers = require("./routes/suppliers");
 
 var app = express();
 
@@ -103,11 +104,10 @@ app.post('/sign_up', passport.authenticate('local-signup', {
 // we will use route middleware to verify this (the checkIfAuthorized function)
 app.get('/profile', userAuth.checkIfAuthorized, userAuth.verifyUser)
 
-// products routes
+// welcome screen route
 app.get('/home', userAuth.checkIfAuthorized, function(req, res){
   res.render('home', { user: req.user });
 });
-
   // products routes
 app.get('/products', userAuth.checkIfAuthorized, products.show);
 app.get('/products/search/:query', userAuth.checkIfAuthorized, products.search);
@@ -149,6 +149,11 @@ app.get('/salesProfits', userAuth.checkIfAuthorized, salesProfits.show);
 app.get('/salesProfits/search/:query', userAuth.checkIfAuthorized, salesProfits.searchProfitsPerProduct);
 app.get('/about', userAuth.checkIfAuthorized, products.about);
 
+app.get('/suppliers',userAuth.checkIfAuthorized, suppliers.show)
+// function(req, res){
+//       res.render('suppliersl')
+//
+// })
  // =====================================
  // LOGOUT ==============================
  // =====================================
