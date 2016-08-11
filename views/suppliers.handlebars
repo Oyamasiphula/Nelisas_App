@@ -1,0 +1,33 @@
+<div class="row">
+  <section class="webdesigntuts-workshop">
+   <form>
+    <label for="pullProductsEarnings">Search</label>
+    <input class='searchTextBox' id="pullProductsEarnings" name="Product_name" placeholder="Search Product">
+       </form>
+  </section>
+  </div>
+
+<div class="row">
+    <div class="col-xs-10" style="float:right">
+        <table class="table table-bordered" id="reqProductsEarning">
+            <thead class="label-info">
+
+                <tr>
+                    <th><h3>suppliers</3></th>
+                </tr>
+            </thead>
+                    {{#suppliers}}
+            <tbody>
+                <tr>
+                    <td><div name="suppliers" class="well well-lg">{{Supplier_name}}</div>
+                    </td>
+
+                </tr>
+            </tbody>
+                    {{/suppliers}}
+        </table>
+            <div>
+                <span class="glyphicon glyphicon-plus"></span><button type="button" class="btn btn-success" onClick="location.href='/sales/showAddSales'">+ Add Suppliers +</button>
+            </div>
+    </div>
+</div>
