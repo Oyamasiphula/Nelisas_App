@@ -90,9 +90,9 @@ app.post('/sign_in', passport.authenticate('local-login', {
 // show the signup form
 app.get('/', userAuth.sign_up)
 // process the signup form
-app.post('/sign_up', passport.authenticate('local-signup', {
+app.post('/', passport.authenticate('local-signup', {
   successRedirect : '/sign_in', // redirect to the secure profile section
-  failureRedirect : '/sign_up', // redirect back to the signup page if there is an error
+  failureRedirect : '/', // redirect back to the signup page if there is an error
   failureFlash : true // allow flash messages
 }));
 
