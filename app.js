@@ -1,45 +1,49 @@
 'use strict';
 
- var express = require('express'),
- 	exphbs = require('express-handlebars'),
- 	mysql = require('mysql'),
- 	myConnection = require('express-myconnection'),
-  bodyParser = require('body-parser'),
-  cookieParser = require('cookie-parser'),
-  session = require('express-session'),
-  morgan = require('morgan'),
-  passport = require('passport'),
-  flash = require('connect-flash'),
-  userAuth = require('./routes/userAuth'),
- 	products = require('./routes/products'),
- 	productsCategories = require('./routes/categories'),
- 	sales = require('./routes/sales'),
- 	salesProfits = require('./routes/salesProfits'),
-  suppliers = require("./routes/suppliers");
+var express = require('express'),
+    exphbs = require('express-handlebars'),
+    mysql = require('mysql'),
+    myConnection = require('express-myconnection'),
+    bodyParser = require('body-parser'),
+    cookieParser = require('cookie-parser'),
+    session = require('express-session'),
+    morgan = require('morgan'),
+    passport = require('passport'),
+    flash = require('connect-flash'),
+    userAuth = require('./routes/userAuth'),
+    products = require('./routes/products'),
+    productsCategories = require('./routes/categories'),
+    sales = require('./routes/sales'),
+    salesProfits = require('./routes/salesProfits'),
+    suppliers = require("./routes/suppliers");
 
 var app = express();
 
 var dbOptions = {
-      host: 'localhost',
-      user: 'nelisa',
-      password: 'password',
-      port: 3306,
-      database: 'Nels_db'
+  host: 'localhost',
+  user: 'nelisa',
+  password: 'password',
+  port: 3306,
+  database: 'Nels_db'
 };
 
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main'
+}));
 app.set('view engine', 'handlebars');
 
 // static files which would be then referenced by its root (/folder/directory/) public_folder will be ignored for file refencing
 app.use(express.static(__dirname + '/public'));
 // static files which would be then referenced by its root (/folder/directory/) and on this following block /bower_components directory will be ignored for file refencing
-app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
 
 //setup middleware
 app.use(myConnection(mysql, dbOptions, 'single'));
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
-// parse application/json
+app.use(bodyParser.urlencoded({
+    extended: false
+  }))
+  // parse application/json
 app.use(bodyParser.json())
 app.use(flash());
 // use connect-flash for flash messages stored in session
@@ -51,10 +55,10 @@ app.use(cookieParser()); // read cookies (needed for auth)
 
 // required for passport
 app.use(session({
-	secret: 'vidyapathaisalwaysrunning',
-	resave: true,
-	saveUninitialized: true
- } )); // session secret
+  secret: 'vidyapathaisalwaysrunning',
+  resave: true,
+  saveUninitialized: true
+})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
@@ -66,21 +70,21 @@ require('./Data_Storage/config/passport')(passport);
 // =====================================
 // show the login form
 app.get('/sign_in', userAuth.sign_In)
-// process the login form
+  // process the login form
 app.post('/sign_in', passport.authenticate('local-login', {
-          successRedirect : '/home', // redirect to the secure profile section
-          failureRedirect : '/sign_in', // redirect back to the signup page if there is an error
-          failureFlash : true // allow flash messages
+    successRedirect: '/home', // redirect to the secure profile section
+    failureRedirect: '/sign_in', // redirect back to the signup page if there is an error
+    failureFlash: true // allow flash messages
   }),
-      function(req, res) {
-          console.log("hello");
+  function(req, res) {
+    console.log("hello");
 
-          if (req.body.remember) {
-            req.session.cookie.maxAge = 1000 * 60 * 3;
-          } else {
-            req.session.cookie.expires = false;
-          }
-      res.redirect('/');
+    if (req.body.remember) {
+      req.session.cookie.maxAge = 1000 * 60 * 3;
+    } else {
+      req.session.cookie.expires = false;
+    }
+    res.redirect('/');
   });
 
 
@@ -89,13 +93,12 @@ app.post('/sign_in', passport.authenticate('local-login', {
 // =====================================
 // show the signup form
 app.get('/', userAuth.sign_up)
-// process the signup form
+  // process the signup form
 app.post('/', passport.authenticate('local-signup', {
-  successRedirect : '/sign_in', // redirect to the secure profile section
-  failureRedirect : '/', // redirect back to the signup page if there is an error
-  failureFlash : true // allow flash messages
+  successRedirect: '/sign_in', // redirect to the secure profile section
+  failureRedirect: '/', // redirect back to the signup page if there is an error
+  failureFlash: true // allow flash messages
 }));
-
 
 // =====================================
 // PROFILE SECTION =========================
@@ -105,10 +108,12 @@ app.post('/', passport.authenticate('local-signup', {
 app.get('/profile', userAuth.checkIfAuthorized, userAuth.verifyUser)
 
 // welcome screen route
-app.get('/home', userAuth.checkIfAuthorized, function(req, res){
-  res.render('home', { user: req.user });
+app.get('/home', userAuth.checkIfAuthorized, function(req, res) {
+  res.render('home', {
+    user: req.user
+  });
 });
-  // products routes
+// products routes
 app.get('/products', userAuth.checkIfAuthorized, products.show);
 app.get('/products/search/:query', userAuth.checkIfAuthorized, products.search);
 app.get('/products/edit/:id', userAuth.checkIfAuthorized, products.showEdit);
@@ -118,19 +123,18 @@ app.post('/products/add/', userAuth.checkIfAuthorized, products.add);
 app.get('/products/delete/:id', userAuth.checkIfAuthorized, products.delete);
 
 // productsCategories routes
-
 /*'/productCategories'is being used as our HTTP host name when you type eg this url name - url("http://localhost:2000/productCategories").end
  dont type "end" use text inside "quotes" then our function route  - "function res.render('productsCategories')" will work as an exception.
  for that matter "findProductCategories" function's results/output inside routes is being parsed as"findCatNames" will be rendered */
-app.get('/addProductsCategories' , userAuth.checkIfAuthorized, productsCategories.showAdd);
+app.get('/addProductsCategories', userAuth.checkIfAuthorized, productsCategories.showAdd);
 app.get('/productsCategories', userAuth.checkIfAuthorized, productsCategories.show);
-app.get('/productsCategories/search/:query',productsCategories.searchCategories)
+app.get('/productsCategories/search/:query', productsCategories.searchCategories)
 app.get('/productsCategories/edit/:id', userAuth.checkIfAuthorized, productsCategories.get);
 app.post('/productsCategories/update/:id', userAuth.checkIfAuthorized, productsCategories.update);
 app.post('/productsCategories/add/', userAuth.checkIfAuthorized, productsCategories.add);
 app.get('/productsCategories/delete/:id', userAuth.checkIfAuthorized, productsCategories.delete);
 
-	// Sales routes
+// Sales routes
 app.get('/sales', userAuth.checkIfAuthorized, sales.showSales);
 app.get('/sales/search/:query', userAuth.checkIfAuthorized, sales.searchSales);
 app.get('/sales/showAddSales/', userAuth.checkIfAuthorized, sales.showAddSales)
@@ -138,30 +142,26 @@ app.post('/sales/add', userAuth.checkIfAuthorized, sales.add);
 app.get('/sales/edit/:id', userAuth.checkIfAuthorized, sales.editSales);
 app.post('/sales/edit/:id/', userAuth.checkIfAuthorized, sales.update);
 
-	// 2nd Sales route(s) for salesSummary
+// 2nd Sales route(s) for salesSummary
 app.get('/salesSummary/showCategories', userAuth.checkIfAuthorized, sales.showCategories);
 app.get('/salesSummary/earningsPerCategory/search/:query', userAuth.checkIfAuthorized, sales.searchEarningsPerCategory);
 app.get('/salesSummary/showCategories/search/:query', userAuth.checkIfAuthorized, sales.searchSalesSum);
 app.get('/salesSummary/earningsPerCategory', userAuth.checkIfAuthorized, sales.earningsPerCategory);
 
-	// 3rd Sales route(s) for salesProfits
+// 3rd Sales route(s) for salesProfits
 app.get('/salesProfits', userAuth.checkIfAuthorized, salesProfits.show);
 app.get('/salesProfits/search/:query', userAuth.checkIfAuthorized, salesProfits.searchProfitsPerProduct);
 app.get('/about', userAuth.checkIfAuthorized, products.about);
 
-app.get('/suppliers',userAuth.checkIfAuthorized, suppliers.show)
-// function(req, res){
-//       res.render('suppliersl')
-//
-// })
- // =====================================
- // LOGOUT ==============================
- // =====================================
- app.get('/logout', userAuth.logout);
+app.get('/suppliers', userAuth.checkIfAuthorized, suppliers.show)
 
+  // =====================================
+  // LOGOUT ==============================
+  // =====================================
+app.get('/logout', userAuth.logout);
 
 var port = process.env.port || 2000
 
-app.listen(port, function(){
-	console.log('listening on *:' + port);
+app.listen(port, function() {
+  console.log('listening on *:' + port);
 });
