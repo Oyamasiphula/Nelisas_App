@@ -15,6 +15,8 @@
         <tr>
           <th>
             <h3>suppliers</3></th>
+          <th>
+            <h3>Manage Suppliers</3></th>
                 </tr>
             </thead>
                     {{#suppliers}}
@@ -22,7 +24,10 @@
                 <tr>
                     <td><div name="suppliers" class="well well-lg">{{Supplier_name}}</div>
                     </td>
-
+                    <td>
+                 <button type="button" class="btn btn-default" onClick="location.href='/suppliers/edit/{{id}}'"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                 <button type="button" class="btn btn-danger" onClick="location.href='/suppliers/delete/{{id}}'"><span class="glyphicon glyphicon-remove"></span> Remove</button>
+                    </td>
                 </tr>
             </tbody>
                     {{/suppliers}}
