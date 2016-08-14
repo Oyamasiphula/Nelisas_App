@@ -1,0 +1,33 @@
+<h1>suppliers</h1>
+<div class="row">
+	<!-- <br>
+{{#suppliers}}
+  <h2>{{Supplier_name}}</h2>
+  <a href="/spazaSuppliers/edit/{{id}}">Edit</a>
+  <a href="/spazaSuppliers/delete/{{id}}">Delete</a>
+{{/suppliers}} -->
+
+{{#empty}}
+  <p>The list is empty.</p>
+{{/empty}}
+
+	<div id="add-categories">
+
+		<h1>Add a Supplier</h1>
+		<form action="/spazaSuppliers/add/" method="POST">
+			Description: <input type="text" name="Supplier_name">
+			<input type="submit">
+		</form>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+</div>
+
+<style type="text/css">
+.main-menu {
+	display: none;
+}
+
+</style>
