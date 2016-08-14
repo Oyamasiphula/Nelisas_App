@@ -156,6 +156,9 @@ app.get('/about', userAuth.checkIfAuthorized, products.about);
 app.get('/suppliers', userAuth.checkIfAuthorized, suppliers.show)
 app.post('/spazaSuppliers/add/', userAuth.checkIfAuthorized, suppliers.addSupplier)
 app.get('/addSpazaSuppliers/', userAuth.checkIfAuthorized, suppliers.showaddSupplier)
+app.get('/suppliers/edit/:id', userAuth.checkIfAuthorized, suppliers.editSupplier)
+app.post('/suppliers/edit/:id', userAuth.checkIfAuthorized, suppliers.update)
+app.get('/suppliers/delete/:id', userAuth.checkIfAuthorized, suppliers.delete)
 
   // =====================================
   // LOGOUT ==============================
