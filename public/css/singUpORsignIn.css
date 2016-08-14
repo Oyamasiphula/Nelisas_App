@@ -122,19 +122,20 @@ color: #ffffff;
 }
 
 input, textarea {
-font-family: "serif","Helvetica Neue",Helvetica,Arial,sans-serif;
-font-size: 14px;
-display: block;
-width: 100%;
-/*height: 100%;*/
-padding: 5px 10px;
-background: none;
-background-image: none;
-border: 1px solid #a0b3b0;
-color: #ffffff;
-border-radius: 0;
--webkit-transition: border-color .25s ease, box-shadow .25s ease;
-transition: border-color .25s ease, box-shadow .25s ease;
+    font-family: "serif","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    display: block;
+    width: 100%;
+    /* height: 100%; */
+    padding: 5px 10px;
+    text-align: center;
+    background: none;
+    background-image: none;
+    border: 1px solid #a0b3b0;
+    color: #ffffff;
+    border-radius: 0;
+    -webkit-transition: border-color .25s ease, box-shadow .25s ease;
+    transition: border-color .25s ease, box-shadow .25s ease;
 }
 input:focus, textarea:focus {
 outline: 0;
@@ -147,10 +148,18 @@ resize: vertical;
 }
 
 .field-wrap {
-position: relative;
-margin-bottom: 40px;
+    position: relative;
+    margin-bottom: 30px;
+    text-align: center;
 }
-
+.container {
+       width: 500px;
+       clear: both;
+   }
+   .container input {
+       width: 100%;
+       clear: both;
+   }
 .top-row:after {
 content: "";
 display: table;
