@@ -154,6 +154,8 @@ app.get('/salesProfits/search/:query', userAuth.checkIfAuthorized, salesProfits.
 app.get('/about', userAuth.checkIfAuthorized, products.about);
 
 app.get('/suppliers', userAuth.checkIfAuthorized, suppliers.show)
+app.post('/spazaSuppliers/add/', userAuth.checkIfAuthorized, suppliers.addSupplier)
+app.get('/addSpazaSuppliers/', userAuth.checkIfAuthorized, suppliers.showaddSupplier)
 
   // =====================================
   // LOGOUT ==============================
