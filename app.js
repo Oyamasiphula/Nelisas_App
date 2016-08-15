@@ -148,15 +148,16 @@ app.get('/salesSummary/earningsPerCategory/search/:query', userAuth.checkIfAutho
 app.get('/salesSummary/showCategories/search/:query', userAuth.checkIfAuthorized, sales.searchSalesSum);
 app.get('/salesSummary/earningsPerCategory', userAuth.checkIfAuthorized, sales.earningsPerCategory);
 
-// 3rd Sales route(s) for salesProfits
+// 3rd Sales route(s) for Profits
 app.get('/salesProfits', userAuth.checkIfAuthorized, salesProfits.show);
 app.get('/salesProfits/search/:query', userAuth.checkIfAuthorized, salesProfits.searchProfitsPerProduct);
 app.get('/about', userAuth.checkIfAuthorized, products.about);
 
+// 3rd Sales route(s) for suppliers
 app.get('/suppliers', userAuth.checkIfAuthorized, suppliers.show)
 app.post('/spazaSuppliers/add/', userAuth.checkIfAuthorized, suppliers.addSupplier)
-app.get('/addSpazaSuppliers/', userAuth.checkIfAuthorized, suppliers.showaddSupplier)
-app.get('/suppliers/edit/:id', userAuth.checkIfAuthorized, suppliers.editSupplier)
+app.get('/addSpazaSuppliers/', userAuth.checkIfAuthorized, suppliers.showAddSupplier)
+app.get('/suppliers/edit/:id', userAuth.checkIfAuthorized, suppliers.showEditSupplier)
 app.post('/suppliers/edit/:id', userAuth.checkIfAuthorized, suppliers.update)
 app.get('/suppliers/delete/:id', userAuth.checkIfAuthorized, suppliers.delete)
 
