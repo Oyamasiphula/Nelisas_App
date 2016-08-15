@@ -10,7 +10,7 @@ exports.show = function(req, res, next) {
   });
 };
 
-exports.showaddSupplier = function(req, res, next) {
+exports.showAddSupplier = function(req, res, next) {
   req.getConnection(function(err, connection) {
     connection.query('SELECT * from Suppliers_td', [], function(err, results) {
       if (err)
@@ -38,10 +38,7 @@ exports.addSupplier = function(req, res, next) {
   });
 }
 exports.editSupplier = function(req, res, next) {
-  var input = JSON.parse(JSON.stringify(req.body));
-  var data = {
-    Supplier_name: input.Supplier_name,
-  };
+  var id = req.params.id;
 
   req.getConnection(function(err, connection) {
     connection.query('SELECT * FROM Suppliers_td WHERE id = ?', [id], function(err, result) {
@@ -54,10 +51,13 @@ exports.editSupplier = function(req, res, next) {
 }
 
 exports.showEditSupplier = function(req, res, next) {
+  var id = req.params.id;
+
   req.getConnection(function(err, connection) {
-    connection.query('SELECT id, Category_name from Categories_td', [], function(err, supplierList) {
+    connection.query('SELECT * FROM Suppliers_td WHERE id = ?', [id], function(err, supplierList) {
       if (err)
         return next("Error Selecting : %s ", err);
+      var suppliers = supplierList[0];
 
       res.render('editSupplier', {
         suppliers: supplierList
@@ -70,7 +70,7 @@ exports.update = function(req, res, next) {
   var id = req.params.id;
 
   req.getConnection(function(err, connection) {
-    connection.query('UPDATE Suppliers_td SET Supplier_name = ?', [data.Supplier_name, id], function(err, rows, fields) {
+    connection.query('UPDATE Suppliers_td SET ? WHERE id = ?',[data, id], function(err, rows) {
       if (err)
         return next("Error Updating : %s ", err);
 
