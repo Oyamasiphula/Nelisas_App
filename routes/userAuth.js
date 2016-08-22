@@ -1,5 +1,3 @@
-var flash = require('connect-flash');
-
 exports.sign_In = function(req, res) {
   res.render('sign_In', {
     message: req.flash('loginMessage')
@@ -25,5 +23,5 @@ exports.checkIfAuthorized = function(req, res, next) {
 };
 exports.logout = function(req, res) {
   req.logout();
-  res.redirect('/');
+  res.redirect('/sign_in');
 };
