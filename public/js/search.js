@@ -6,7 +6,7 @@
 		$.get("/products/search/" + productPullReq, function(results){
 			$("#reqProductsOutPut").html(results);
 		  });
-	});	
+	});
 				//Category Search
 	$("#pullCatNameReq").keyup(function(){
 		var pullCatNameReq = $("#pullCatNameReq").val();
@@ -75,4 +75,4 @@
 	$(function(){setTimeout(function(){
 		$('.content').addClass('fadeIn');},300);
 	});
-});	
+});
