@@ -2,13 +2,13 @@
   <section class="webdesigntuts-workshop">
    <form>
     <label for="pullCategoryName">Search</label>
-    <input class='searchbar' id="pullCategoryName" name="Category_name" placeholder="Search Category">         
+    <input class='searchbar' id="pullCategoryName" name="Category_name" placeholder="Search Category">
        </form>
   </section>
   </div>
 
-<div class="row"> 
-    <div class="col-xs-10" style="float:right">
+<div class="row">
+    <div class="col-xs-10">
         <table class="table table-bordered" id="reqEarningsCategoryNameTd">
     <thead class="label-info">
         <tr>
@@ -16,7 +16,7 @@
         <th><h3>Earnings Per Category</h3></th>
         </tr>
     </thead>
-    {{#sumOfEarningsPerCategory}} 
+    {{#sumOfEarningsPerCategory}}
         <tbody>
             <tr>
         <td><div class="well well-lg" >{{Category_name}}</div></td>
