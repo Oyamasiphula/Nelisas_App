@@ -13,7 +13,7 @@
           {{#if message}}
               <div class="alert alert-danger">{{message}}</div>
           {{/if}}
-          <form action="/" method="post">
+          <form name="newUserCredentials"  action="/" method="post">
               <div class="top-row">
                 <div class="field-wrap">
                   <label>
@@ -28,19 +28,19 @@
                 <label>
                   Set A Password<span class="req">*</span>
                 </label>
-                <input type="password" placeholder="enter password" name="password" id="passphrase1" required autocomplete="off"/>
+                <input type="password" required autocomplete="off" placeholder="enter password" name="password" id="passphrase1" onKeyUp="validate()"/>
                 <br>
                 <!-- </div>
                 <div class="field-wrap"> -->
                 <label>
                   Set A Password<span class="req">*</span>
                 </label>
-                <input type="password" required autocomplete="off" placeholder="re-enter password" id="passphrase2" onkeyup="checkPass(); return false;"/>
+                <input type="password" required autocomplete="off" placeholder="re-enter password" id="passphrase2" onKeyUp="validate()"/>
                    <span id="confirmMessage" class="confirmMessage"></span>
                 </div>
               </div>
           <br>
-              <button type="submit" class="button button-block"/>Get Started</button>
+              <button type="submit" class="button button-block" value="Submit" id="submitbtn" disabled/>Get Started</button>
           </form>
         </div>
     </div><!-- tab-content -->
