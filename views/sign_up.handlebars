@@ -1,3 +1,5 @@
+<script  src="./js/checkpass.js"></script>
+
 <div class="form">
 
       <ul class="tab-group">
@@ -26,7 +28,15 @@
                 <label>
                   Set A Password<span class="req">*</span>
                 </label>
-                <input type="password" placeholder="re-enter password" name="password" required autocomplete="off"/>
+                <input type="password" placeholder="enter password" name="password" id="passphrase1" required autocomplete="off"/>
+                <br>
+                <!-- </div>
+                <div class="field-wrap"> -->
+                <label>
+                  Set A Password<span class="req">*</span>
+                </label>
+                <input type="password" required autocomplete="off" placeholder="re-enter password" id="passphrase2" onkeyup="checkPass(); return false;"/>
+                   <span id="confirmMessage" class="confirmMessage"></span>
                 </div>
               </div>
           <br>
