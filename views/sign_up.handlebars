@@ -28,14 +28,14 @@
                 <label>
                   Set A Password<span class="req">*</span>
                 </label>
-                <input type="password" required autocomplete="off" placeholder="enter password" name="password" id="passphrase1" onKeyUp="validate()"/>
+                <input type="password" required autocomplete="off" minlength="4" placeholder="enter password" name="password" id="passphrase1" onKeyUp="validate()"/>
                 <br>
                 <!-- </div>
                 <div class="field-wrap"> -->
                 <label>
                   Set A Password<span class="req">*</span>
                 </label>
-                <input type="password" required autocomplete="off" placeholder="re-enter password" id="passphrase2" onKeyUp="validate()"/>
+                <input type="password" required autocomplete="off" placeholder="Confirm password" id="passphrase2" onKeyUp="validate(),checkPassConfirmation()";/>
                    <span id="confirmMessage" class="confirmMessage"></span>
                 </div>
               </div>
