@@ -15,8 +15,8 @@ exports.searchCategories = function(req, res, next) {
 };
 
 exports.show = function(req, res, next) {
-  var showMostPopularCat = 'SELECT Categories_td.Category_name ,SUM(Sales_td.qTy) AS Quantity FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id GROUP BY Categories_td.Category_name ORDER BY Quantity DESC LIMIT 0,1';
-  var showLeastPopularCAt = 'SELECT Categories_td.Category_name ,SUM(Sales_td.qTy) AS Quantity FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id GROUP BY Categories_td.Category_name ORDER BY Quantity ASC LIMIT 0,1';
+  var showMostPopularCat = 'SELECT Categories_td.Category_name ,SUM(Sales_td.qTy) AS Quantity FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.Product_id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id GROUP BY Categories_td.Category_name ORDER BY Quantity DESC LIMIT 0,1';
+  var showLeastPopularCAt = 'SELECT Categories_td.Category_name ,SUM(Sales_td.qTy) AS Quantity FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.Product_id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id GROUP BY Categories_td.Category_name ORDER BY Quantity ASC LIMIT 0,1';
 
   req.getConnection(function(err, connection) {
     connection.query(showMostPopularCat, [], function(err, showMostPopularCat) {
