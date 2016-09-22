@@ -1,5 +1,4 @@
 'use strict';
-
 var express = require('express'),
     exphbs = require('express-handlebars'),
     mysql = require('mysql'),
@@ -21,7 +20,7 @@ var app = express();
 
 var dbOptions = {
   host: 'localhost',
-  user: 'nelisa',
+  user: 'Nelisa',
   password: 'password',
   port: 3306,
   database: 'Nels_db'
@@ -47,12 +46,9 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 app.use(flash());
 // use connect-flash for flash messages stored in session
-
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
-
-
 // required for passport
 app.use(session({
   secret: 'vidyapathaisalwaysrunning',
@@ -63,7 +59,6 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
 require('./Data_Storage/config/passport')(passport);
-
 
 // =====================================
 // LOGIN ===============================
@@ -78,7 +73,6 @@ app.post('/sign_in', passport.authenticate('local-login', {
   }),
   function(req, res) {
     console.log("hello");
-
     if (req.body.remember) {
       req.session.cookie.maxAge = 1000 * 60 * 3;
     } else {
@@ -105,7 +99,7 @@ app.post('/', passport.authenticate('local-signup', {
 // =====================================
 // we will want this protected so you have to be logged in to visit
 // we will use route middleware to verify this (the checkIfAuthorized function)
-app.get('/profile', userAuth.checkIfAuthorized, userAuth.verifyUser)
+app.get('/profile', userAuth.checkIfAuthorized, userAuth.verifyUser);
 
 // welcome screen route
 app.get('/home', userAuth.checkIfAuthorized, function(req, res) {
@@ -116,11 +110,11 @@ app.get('/home', userAuth.checkIfAuthorized, function(req, res) {
 // products routes
 app.get('/products', userAuth.checkIfAuthorized, products.show);
 app.get('/products/search/:query', userAuth.checkIfAuthorized, products.search);
-app.get('/products/edit/:id', userAuth.checkIfAuthorized, products.showEdit);
-app.post('/products/edit/:id', userAuth.checkIfAuthorized, products.update);
 app.get('/products/add/', userAuth.checkIfAuthorized, products.showAdd);
 app.post('/products/add/', userAuth.checkIfAuthorized, products.add);
-app.get('/products/delete/:id', userAuth.checkIfAuthorized, products.delete);
+app.get('/products/edit/:Product_id', userAuth.checkIfAuthorized, products.showEdit);
+app.post('/products/edit/update/:Product_id', userAuth.checkIfAuthorized, products.update);
+app.get('/products/delete/:Product_id', userAuth.checkIfAuthorized, products.delete);
 
 // productsCategories routes
 /*'/productCategories'is being used as our HTTP host name when you type eg this url name - url("http://localhost:2000/productCategories").end
@@ -147,19 +141,17 @@ app.get('/salesSummary/showCategories', userAuth.checkIfAuthorized, sales.showCa
 app.get('/salesSummary/earningsPerCategory/search/:query', userAuth.checkIfAuthorized, sales.searchEarningsPerCategory);
 app.get('/salesSummary/showCategories/search/:query', userAuth.checkIfAuthorized, sales.searchSalesSum);
 app.get('/salesSummary/earningsPerCategory', userAuth.checkIfAuthorized, sales.earningsPerCategory);
-
 // 3rd Sales route(s) for Profits
 app.get('/salesProfits', userAuth.checkIfAuthorized, salesProfits.show);
 app.get('/salesProfits/search/:query', userAuth.checkIfAuthorized, salesProfits.searchProfitsPerProduct);
 app.get('/about', userAuth.checkIfAuthorized, products.about);
-
-// 3rd Sales route(s) for suppliers
-app.get('/suppliers', userAuth.checkIfAuthorized, suppliers.show)
-app.post('/spazaSuppliers/add/', userAuth.checkIfAuthorized, suppliers.addSupplier)
-app.get('/addSpazaSuppliers/', userAuth.checkIfAuthorized, suppliers.showAddSupplier)
-app.get('/suppliers/edit/:id', userAuth.checkIfAuthorized, suppliers.showEditSupplier)
-app.post('/suppliers/edit/:id', userAuth.checkIfAuthorized, suppliers.update)
-app.get('/suppliers/delete/:id', userAuth.checkIfAuthorized, suppliers.delete)
+//4th suppliers route(s)
+app.get('/suppliers', userAuth.checkIfAuthorized, suppliers.show);
+app.post('/spazaSuppliers/add/', userAuth.checkIfAuthorized, suppliers.addSupplier);
+app.get('/addSpazaSuppliers/', userAuth.checkIfAuthorized, suppliers.showAddSupplier);
+app.get('/suppliers/edit/:id', userAuth.checkIfAuthorized, suppliers.showEditSupplier);
+app.post('/suppliers/edit/:id', userAuth.checkIfAuthorized, suppliers.update);
+app.get('/suppliers/delete/:id', userAuth.checkIfAuthorized, suppliers.delete);
 
   // =====================================
   // LOGOUT ==============================
