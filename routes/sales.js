@@ -3,7 +3,7 @@ exports.searchSales = function(req, res, next) {
   		pullProductsEarnings = '%' + pullProductsEarnings + '%';
 
   req.getConnection(function(err, connection) {
-    connection.query('SELECT Sales_td.Product_id, SUM(Sales_td.qTy * Sales_td.product_price) AS Tot_Earnings_Per_Product, Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id WHERE Products_td.Product_name LIKE ? group by Products_td.Product_name ASC', [pullProductsEarnings, pullProductsEarnings], function(err, results) {
+    connection.query('SELECT Sales_td.Product_id, SUM(Sales_td.qTy * Sales_td.product_price) AS Tot_Earnings_Per_Product, Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.Product_id WHERE Products_td.Product_name LIKE ? group by Products_td.Product_name ASC', [pullProductsEarnings, pullProductsEarnings], function(err, results) {
       if (err)
         return next("error selecting : %s ", err)
       res.render('searchProductsEarnings', {
@@ -19,7 +19,7 @@ exports.searchSalesSum = function(req, res, next) {
   pullSumOfEarnings = '%' + pullSumOfEarnings + '%';
 
   req.getConnection(function(err, connection) {
-    connection.query('SELECT Categories_td.Category_name, SUM(Sales_td.qTy * Sales_td.product_price) AS Tot_Earnings_Per_Product, Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id WHERE Product_name LIKE ? OR Categories_td.Category_name like ? group by Products_td.Product_name ASC', [pullSumOfEarnings, pullSumOfEarnings], function(err, results) {
+    connection.query('SELECT Categories_td.Category_name, SUM(Sales_td.qTy * Sales_td.product_price) AS Tot_Earnings_Per_Product, Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.Product_id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id WHERE Product_name LIKE ? OR Categories_td.Category_name like ? group by Products_td.Product_name ASC', [pullSumOfEarnings, pullSumOfEarnings], function(err, results) {
       if (err)
         return next("error selecting : %s ", err)
       res.render('searchSalesSum', {
@@ -33,7 +33,7 @@ exports.searchSalesSum = function(req, res, next) {
 exports.searchEarningsPerCategory = function(req, res, next) {
   var pullCategoryName = req.params.query;
   pullCategoryName = '%' + pullCategoryName + '%';
-  var getCategoryName = 'SELECT Categories_td.Category_name, SUM(Sales_td.qTy * Sales_td.product_price) AS Tot_Earnings_Per_Product FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id WHERE Category_name LIKE ? group by Categories_td.Category_name ASC';
+  var getCategoryName = 'SELECT Categories_td.Category_name, SUM(Sales_td.qTy * Sales_td.product_price) AS Tot_Earnings_Per_Product FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.Product_id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id WHERE Category_name LIKE ? group by Categories_td.Category_name ASC';
 
   req.getConnection(function(err, connection) {
     connection.query(getCategoryName, [pullCategoryName, pullCategoryName], function(err, results) {
@@ -52,7 +52,7 @@ exports.showSales = function(req, res, next) {
   var data = JSON.parse(JSON.stringify(req.body));
 
   req.getConnection(function(err, connection) {
-    connection.query('SELECT Categories_td.Category_name, SUM(Sales_td.qTy * Sales_td.product_price) AS Tot_Earnings_Per_Product, Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id group by Products_td.Product_name', [], function(err, results) {
+    connection.query('SELECT Categories_td.Category_name, SUM(Sales_td.qTy * Sales_td.product_price) AS Tot_Earnings_Per_Product, Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.Product_id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id group by Products_td.Product_id, Products_td.Product_name', [], function(err, results) {
       if (err)
         return next("error selecting : %s ", err);
       res.render('sales', {
@@ -63,7 +63,7 @@ exports.showSales = function(req, res, next) {
 };
 exports.editSales = function(req, res, next) {
   var Id = req.params.Id;
-	
+
   req.getConnection(function(err, connection) {
     connection.query('SELECT id, product_price, qTy,Product_id FROM Sales_td WHERE id = ?', [id], function(err, rows) {
       if (err) {
@@ -82,7 +82,7 @@ exports.showCategories = function(req, res, next) {
   var data = JSON.parse(JSON.stringify(req.body));
 
   req.getConnection(function(err, connection) {
-    connection.query('SELECT Categories_td.Category_name, SUM(Sales_td.qTy * Sales_td.product_price) AS Tot_Earnings_Per_Product, Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id group by Products_td.Product_name', [], function(err, EarningsPerProductsCategory) {
+    connection.query('SELECT Categories_td.Category_name, SUM(Sales_td.qTy * Sales_td.product_price) AS Tot_Earnings_Per_Product, Product_name FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.Product_id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id group by Products_td.Product_id ,Products_td.Product_name', [], function(err, EarningsPerProductsCategory) {
       if (err)
         return next("error selecting : %s ", err);
       res.render('salesSummary', {
@@ -97,7 +97,7 @@ exports.earningsPerCategory = function(req, res, next) {
   var data = JSON.parse(JSON.stringify(req.body));
 
   req.getConnection(function(err, connection) {
-    connection.query('SELECT Categories_td.Category_name, SUM(Sales_td.qTy * Sales_td.product_price) AS Tot_Earnings_Per_Product FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id group by Products_td.Category_id', [], function(err, EarningsPerCategoryData) {
+    connection.query('SELECT Categories_td.Category_name, SUM(Sales_td.qTy * Sales_td.product_price) AS Tot_Earnings_Per_Product FROM Sales_td INNER JOIN Products_td ON Sales_td.Product_id = Products_td.Product_id INNER JOIN Categories_td ON Products_td.Category_id = Categories_td.id group by Products_td.Category_id', [], function(err, EarningsPerCategoryData) {
       if (err)
         return next("error selecting : %s ", err)
       res.render('salesEarningsPerCat', {
@@ -110,7 +110,7 @@ exports.earningsPerCategory = function(req, res, next) {
 exports.showAddSales = function(req, res, next) {
   req.getConnection(function(err, connection) {
 
-    connection.query('SELECT Sales_td.id, Products_td.Product_name, Sales_date, product_price, qTy FROM Sales_td, Products_td WHERE Products_td.id = Sales_td.Product_id order by Sales_td.id;', [], function(error, results) {
+    connection.query('SELECT Sales_td.id, Products_td.Product_name, Sales_date, product_price, qTy FROM Sales_td, Products_td WHERE Products_td.Product_id = Sales_td.Product_id order by Sales_td.id;', [], function(error, results) {
       if (err)
         return next("Error selecting : %s ", err);
       connection.query('SELECT Product_name FROM Products_td', [], function(err, productNameOption) {
