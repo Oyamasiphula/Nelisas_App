@@ -415,6 +415,30 @@ header .intro-text .skills {
 #cssmenu {padding: 0; margin: 0; border: 0; width:100%}
 #cssmenu ul, #cssmenu li {list-style: none; margin: 0;padding-left: 2px;}
 #cssmenu ul {position: relative; z-index: 597; padding-left: 461px;}
+@media only screen and (max-width:990px) {
+   #cssmenu ul {
+    z-index: 597;
+    margin: auto;
+    display: grid;
+    float: right;
+  }
+
+  .Home-but {
+    padding: 13px;
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    position: absolute;
+    margin: auto;
+  }
+  #cssmenu {
+    background: #333;
+    border-bottom: 4px solid #1b9bff;
+    font-family: initial;
+    font-size: 12px;   
+  }
+}
 #cssmenu ul li { float: left; min-height: 1px; vertical-align: middle;}
 #cssmenu ul li.hover,
 #cssmenu ul li:hover {position: relative; z-index: 599; cursor: default;}
