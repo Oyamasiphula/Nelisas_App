@@ -414,7 +414,7 @@ header .intro-text .skills {
 
 #cssmenu {padding: 0; margin: 0; border: 0; width:100%}
 #cssmenu ul, #cssmenu li {list-style: none; margin: 0;padding-left: 2px;}
-#cssmenu ul {position: relative; z-index: 597; padding-left: 461px;}
+#cssmenu ul {list-style: none;overflow: hidden;position: relative;z-index: 597;padding: 0px;margin: 0px;}
 @media only screen and (max-width:990px) {
    #cssmenu ul {
     z-index: 597;
