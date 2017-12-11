@@ -439,7 +439,7 @@ header .intro-text .skills {
     font-size: 12px;   
   }
 }
-#cssmenu ul li { float: left; min-height: 1px; vertical-align: middle;}
+#cssmenu ul li {float: left;border: 1px solid #b84348;border-radius: 5px;margin: 1px;}
 #cssmenu ul li.hover,
 #cssmenu ul li:hover {position: relative; z-index: 599; cursor: default;}
 #cssmenu ul ul {visibility: hidden; position: absolute; top: 100%; left: 0; z-index: 598; width: 100%;}
