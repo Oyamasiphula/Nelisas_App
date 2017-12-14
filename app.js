@@ -20,7 +20,7 @@ var app = express();
 
 var dbOptions = {
   host: 'localhost',
-  user: 'Nelisa',
+  user: 'nelisa',
   password: 'password',
   port: 3306,
   database: 'Nels_db'
@@ -158,7 +158,7 @@ app.get('/suppliers/delete/:id', userAuth.checkIfAuthorized, suppliers.delete);
   // =====================================
 app.get('/logout', userAuth.logout);
 
-var port = process.env.port || 2000
+var port = process.env.port || 8080
 
 app.listen(port, function() {
   console.log('listening on *:' + port);
