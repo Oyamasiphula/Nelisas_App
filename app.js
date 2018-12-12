@@ -158,7 +158,7 @@ app.get('/suppliers/delete/:id', userAuth.checkIfAuthorized, suppliers.delete);
   // =====================================
 app.get('/logout', userAuth.logout);
 
-var port = process.env.PORT || 8080
+const port = process.env.PORT || 8080
 
 app.listen(port, function() {
   console.log('listening on *:' + port);
